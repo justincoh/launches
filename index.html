@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Space Launch Explorer</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F680;</text></svg>" />
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <h1>Space Launch Explorer</h1>
+      <p class="subtitle">Every orbital launch attempt, 1957 &ndash; 2026</p>
+    </header>
+
+    <div id="filter-bar" class="filter-bar"></div>
+
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading launch data&hellip;</p>
+    </div>
+
+    <main id="dashboard" class="dashboard" style="display:none;">
+      <section class="chart-section chart-full" id="chart-launches-over-time">
+        <div class="chart-header">
+          <h2>Launches Over Time</h2>
+          <div class="chart-controls"></div>
+        </div>
+        <div class="chart-body"></div>
+      </section>
+
+      <section class="chart-section chart-half" id="chart-success-failure">
+        <div class="chart-header">
+          <h2>Success vs. Failure</h2>
+          <div class="chart-controls"></div>
+        </div>
+        <div class="chart-body"></div>
+      </section>
+
+      <section class="chart-section chart-half" id="chart-top-rankings">
+        <div class="chart-header">
+          <h2>Top Rankings</h2>
+          <div class="chart-controls"></div>
+        </div>
+        <div class="chart-body"></div>
+      </section>
+
+      <section class="chart-section chart-full" id="chart-launch-cadence">
+        <div class="chart-header">
+          <h2>Launch Cadence</h2>
+          <div class="chart-controls"></div>
+        </div>
+        <div class="chart-body"></div>
+      </section>
+
+      <section class="chart-section chart-full" id="chart-vehicle-timeline">
+        <div class="chart-header">
+          <h2>Vehicle Lifespan Timeline</h2>
+          <div class="chart-controls"></div>
+        </div>
+        <div class="chart-body"></div>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
