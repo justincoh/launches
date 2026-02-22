@@ -146,24 +146,6 @@ export function topN(launches, field, n = 10) {
     .map(([label, count]) => ({ label, count }));
 }
 
-export function cadenceData(launches) {
-  const map = new Map();
-  for (const d of launches) {
-    if (!d.date || d.year == null) continue;
-    const dayOfYear = Math.floor(
-      (d.date - new Date(d.year, 0, 1)) / 86400000
-    );
-    const key = `${d.year}-${dayOfYear}`;
-    map.set(key, (map.get(key) || 0) + 1);
-  }
-  const result = [];
-  for (const [key, count] of map) {
-    const [year, day] = key.split('-').map(Number);
-    result.push({ year, day, count });
-  }
-  return result;
-}
-
 export function vehicleLifespans(launches, topCount = 30) {
   const map = new Map();
   for (const d of launches) {

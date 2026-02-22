@@ -9,7 +9,6 @@ import { chartManager } from './charts/chartManager.js';
 import { createLaunchesOverTime } from './charts/launchesOverTime.js';
 import { createSuccessFailure } from './charts/successFailure.js';
 import { createTopRankings } from './charts/topRankings.js';
-import { createLaunchCadence } from './charts/launchCadence.js';
 import { createVehicleTimeline } from './charts/vehicleTimeline.js';
 
 async function init() {
@@ -33,13 +32,11 @@ async function init() {
     const lotChart = createLaunchesOverTime(dashboardEl);
     const sfChart = createSuccessFailure(dashboardEl);
     const trChart = createTopRankings(dashboardEl);
-    const lcChart = createLaunchCadence(dashboardEl);
     const vtChart = createVehicleTimeline(dashboardEl);
 
     chartManager.register(lotChart);
     chartManager.register(sfChart);
     chartManager.register(trChart);
-    chartManager.register(lcChart);
     chartManager.register(vtChart);
 
     // Show dashboard
