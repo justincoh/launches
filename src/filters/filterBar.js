@@ -1,6 +1,7 @@
 import { filterState } from './filterState.js';
 import { createSearchableDropdown } from './searchableDropdown.js';
 import { uniqueValues } from '../data/aggregator.js';
+import { SITE_NAMES } from '../data/siteNames.js';
 
 let dropdowns = {};
 
@@ -11,8 +12,8 @@ export function initFilterBar(container, launches) {
     { key: 'country', label: 'Country', field: 'SatState' },
     { key: 'agency', label: 'Agency', field: 'Agency' },
     { key: 'vehicle', label: 'Vehicle', field: 'LV_Type' },
-    { key: 'site', label: 'Site', field: 'Launch_Site' },
-    { key: 'pad', label: 'Pad', field: 'Launch_Pad' },
+    { key: 'site', label: 'Site', field: 'Launch_Site', displayNames: SITE_NAMES },
+    { key: 'pad', label: 'Pad', field: 'Launch_Pad', displayNames: SITE_NAMES },
   ];
 
   // Mobile filter button
@@ -46,8 +47,9 @@ export function initFilterBar(container, launches) {
       options,
       value: state[cfg.key],
       onChange: (val) => filterState.set({ [cfg.key]: val }),
+      displayNames: cfg.displayNames,
     });
-    dropdowns[cfg.key] = { dd, field: cfg.field };
+    dropdowns[cfg.key] = { dd, field: cfg.field, displayNames: cfg.displayNames };
 
     // Mobile version
     const group = document.createElement('div');
@@ -58,8 +60,9 @@ export function initFilterBar(container, launches) {
       options,
       value: state[cfg.key],
       onChange: (val) => filterState.set({ [cfg.key]: val }),
+      displayNames: cfg.displayNames,
     });
-    dropdowns[cfg.key + '_mobile'] = { dd: mobileDd, field: cfg.field };
+    dropdowns[cfg.key + '_mobile'] = { dd: mobileDd, field: cfg.field, displayNames: cfg.displayNames };
     overlay.appendChild(group);
   }
 

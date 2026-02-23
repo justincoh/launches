@@ -113,6 +113,12 @@
   color: var(--text-muted);
   font-size: 0.7rem;
   font-family: var(--mono);
+  flex-shrink: 0;
+}
+
+.dropdown-option .full-name {
+  color: var(--text-muted);
+  font-size: 0.7rem;
 }
 
 .filter-search-input {

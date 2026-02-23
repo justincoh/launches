@@ -1,10 +1,16 @@
-export function createSearchableDropdown(container, { label, options, value, onChange }) {
+export function createSearchableDropdown(container, { label, options, value, onChange, displayNames }) {
   const item = document.createElement('div');
   item.className = 'filter-item';
 
+  function displayLabel(val) {
+    if (!val) return label;
+    if (displayNames && displayNames[val]) return `${val} (${displayNames[val]})`;
+    return val;
+  }
+
   const trigger = document.createElement('button');
   trigger.className = 'filter-trigger' + (value ? ' has-value' : '');
-  trigger.innerHTML = `<span class="label">${value || label}</span><span class="arrow">\u25BC</span>`;
+  trigger.innerHTML = `<span class="label">${displayLabel(value)}</span><span class="arrow">\u25BC</span>`;
 
   const panel = document.createElement('div');
   panel.className = 'dropdown-panel';
@@ -33,7 +39,11 @@ export function createSearchableDropdown(container, { label, options, value, onC
   function renderOptions(query = '') {
     const q = query.toLowerCase();
     filtered = q
-      ? options.filter(o => o.value.toLowerCase().includes(q))
+      ? options.filter(o => {
+          if (o.value.toLowerCase().includes(q)) return true;
+          if (displayNames && displayNames[o.value] && displayNames[o.value].toLowerCase().includes(q)) return true;
+          return false;
+        })
       : options;
 
     optList.innerHTML = '';
@@ -51,7 +61,10 @@ export function createSearchableDropdown(container, { label, options, value, onC
       const o = filtered[i];
       const div = document.createElement('div');
       div.className = 'dropdown-option' + (o.value === value ? ' selected' : '');
-      div.innerHTML = `<span>${o.value}</span><span class="count">${o.count}</span>`;
+      const nameSpan = displayNames && displayNames[o.value]
+        ? `${o.value} <span class="full-name">(${displayNames[o.value]})</span>`
+        : o.value;
+      div.innerHTML = `<span>${nameSpan}</span><span class="count">${o.count}</span>`;
       div.addEventListener('click', () => select(o.value));
       optList.appendChild(div);
     }
@@ -125,7 +138,7 @@ export function createSearchableDropdown(container, { label, options, value, onC
       options = newOptions;
       value = newValue;
       trigger.className = 'filter-trigger' + (value ? ' has-value' : '');
-      trigger.querySelector('.label').textContent = value || label;
+      trigger.querySelector('.label').textContent = displayLabel(value);
       if (isOpen) renderOptions(searchInput.value);
     }
   };
