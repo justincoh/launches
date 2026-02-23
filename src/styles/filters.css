@@ -130,6 +130,47 @@
   border-color: var(--accent);
 }
 
+.typeahead-wrap {
+  position: relative;
+}
+
+.typeahead-list {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  z-index: 100;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  width: 260px;
+  max-height: 260px;
+  overflow-y: auto;
+  box-shadow: var(--shadow);
+}
+
+.typeahead-list:empty {
+  display: none;
+}
+
+.typeahead-item {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background .1s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.typeahead-item:hover,
+.typeahead-item.highlighted {
+  background: var(--surface-hover);
+}
+
+.typeahead-item strong {
+  color: var(--accent);
+}
+
 .filter-range {
   display: flex;
   align-items: center;
@@ -243,6 +284,7 @@
 
 @media (max-width: 768px) {
   .filter-bar .filter-item,
+  .filter-bar .typeahead-wrap,
   .filter-bar .filter-search-input,
   .filter-bar .filter-range,
   .filter-bar .clear-btn {

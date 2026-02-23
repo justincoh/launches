@@ -63,19 +63,63 @@ export function initFilterBar(container, launches) {
     overlay.appendChild(group);
   }
 
-  // Payload search
+  // Build payload name index for typeahead
+  const payloadNames = buildPayloadIndex(launches);
+
+  // Payload search with typeahead
+  const searchWrap = document.createElement('div');
+  searchWrap.className = 'typeahead-wrap';
+
   const searchInput = document.createElement('input');
   searchInput.type = 'text';
   searchInput.className = 'filter-search-input';
   searchInput.placeholder = 'Search payloads...';
-  container.appendChild(searchInput);
+  searchWrap.appendChild(searchInput);
+
+  const suggestionList = document.createElement('div');
+  suggestionList.className = 'typeahead-list';
+  searchWrap.appendChild(suggestionList);
+
+  container.appendChild(searchWrap);
 
   let debounceTimer;
+  let highlightedIdx = -1;
+
   searchInput.addEventListener('input', () => {
     clearTimeout(debounceTimer);
+    const q = searchInput.value.trim();
+    showSuggestions(q, suggestionList, payloadNames, searchInput);
     debounceTimer = setTimeout(() => {
       filterState.set({ payloadSearch: searchInput.value });
     }, 300);
+  });
+
+  searchInput.addEventListener('keydown', (e) => {
+    const items = suggestionList.querySelectorAll('.typeahead-item');
+    if (!items.length) return;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      highlightedIdx = Math.min(highlightedIdx + 1, items.length - 1);
+      updateTypeaheadHighlight(items, highlightedIdx);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      highlightedIdx = Math.max(highlightedIdx - 1, 0);
+      updateTypeaheadHighlight(items, highlightedIdx);
+    } else if (e.key === 'Enter' && highlightedIdx >= 0) {
+      e.preventDefault();
+      items[highlightedIdx].click();
+    } else if (e.key === 'Escape') {
+      suggestionList.innerHTML = '';
+      highlightedIdx = -1;
+    }
+  });
+
+  searchInput.addEventListener('blur', () => {
+    // Delay to allow click on suggestion
+    setTimeout(() => {
+      suggestionList.innerHTML = '';
+      highlightedIdx = -1;
+    }, 150);
   });
 
   // Mobile payload search
@@ -195,4 +239,49 @@ export function initFilterBar(container, launches) {
       }
     }
   });
+}
+
+function buildPayloadIndex(launches) {
+  const names = new Set();
+  for (const d of launches) {
+    if (d.Name) names.add(d.Name);
+  }
+  return [...names].sort();
+}
+
+function showSuggestions(query, listEl, names, input) {
+  listEl.innerHTML = '';
+  if (!query || query.length < 1) return;
+
+  const q = query.toLowerCase();
+  const matches = [];
+  for (let i = 0; i < names.length && matches.length < 8; i++) {
+    if (names[i].toLowerCase().includes(q)) matches.push(names[i]);
+  }
+  if (!matches.length) return;
+
+  for (const name of matches) {
+    const item = document.createElement('div');
+    item.className = 'typeahead-item';
+    const idx = name.toLowerCase().indexOf(q);
+    item.innerHTML =
+      escapeHtml(name.slice(0, idx)) +
+      '<strong>' + escapeHtml(name.slice(idx, idx + query.length)) + '</strong>' +
+      escapeHtml(name.slice(idx + query.length));
+    item.addEventListener('click', () => {
+      input.value = name;
+      listEl.innerHTML = '';
+      filterState.set({ payloadSearch: name });
+    });
+    listEl.appendChild(item);
+  }
+}
+
+function updateTypeaheadHighlight(items, idx) {
+  items.forEach((el, i) => el.classList.toggle('highlighted', i === idx));
+  if (items[idx]) items[idx].scrollIntoView({ block: 'nearest' });
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
