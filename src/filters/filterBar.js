@@ -3,6 +3,7 @@ import { createSearchableDropdown } from './searchableDropdown.js';
 import { uniqueValues } from '../data/aggregator.js';
 import { SITE_NAMES } from '../data/siteNames.js';
 import { AGENCY_NAMES } from '../data/agencyNames.js';
+import { COUNTRY_NAMES } from '../data/countryNames.js';
 
 let dropdowns = {};
 
@@ -10,7 +11,7 @@ export function initFilterBar(container, launches) {
   container.innerHTML = '';
 
   const configs = [
-    { key: 'country', label: 'Country', field: 'SatState' },
+    { key: 'country', label: 'Country', field: 'SatState', displayNames: COUNTRY_NAMES },
     { key: 'agency', label: 'Agency', field: 'Agency', displayNames: AGENCY_NAMES },
     { key: 'vehicle', label: 'Vehicle', field: 'LV_Type' },
     { key: 'site', label: 'Site', field: 'Launch_Site', displayNames: SITE_NAMES },
