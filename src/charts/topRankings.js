@@ -7,12 +7,13 @@ import { filterState } from '../filters/filterState.js';
 import { observeResize } from '../utils/responsive.js';
 import { COUNTRY_NAMES } from '../data/countryNames.js';
 import { AGENCY_NAMES } from '../data/agencyNames.js';
+import { SITE_NAMES } from '../data/siteNames.js';
 
 const PANELS = [
   { title: 'Top Countries', field: 'SatState', filterKey: 'country', displayNames: COUNTRY_NAMES },
   { title: 'Top Agencies', field: 'Agency', filterKey: 'agency', displayNames: AGENCY_NAMES },
   { title: 'Top Vehicles', field: 'LV_Type', filterKey: 'vehicle' },
-  { title: 'Top Sites', field: 'Launch_Site', filterKey: 'site' },
+  { title: 'Top Sites', field: 'Launch_Site', filterKey: 'site', displayNames: SITE_NAMES },
 ];
 
 export function createTopRankings(container) {
