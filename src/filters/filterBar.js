@@ -2,6 +2,7 @@ import { filterState } from './filterState.js';
 import { createSearchableDropdown } from './searchableDropdown.js';
 import { uniqueValues } from '../data/aggregator.js';
 import { SITE_NAMES } from '../data/siteNames.js';
+import { AGENCY_NAMES } from '../data/agencyNames.js';
 
 let dropdowns = {};
 
@@ -10,7 +11,7 @@ export function initFilterBar(container, launches) {
 
   const configs = [
     { key: 'country', label: 'Country', field: 'SatState' },
-    { key: 'agency', label: 'Agency', field: 'Agency' },
+    { key: 'agency', label: 'Agency', field: 'Agency', displayNames: AGENCY_NAMES },
     { key: 'vehicle', label: 'Vehicle', field: 'LV_Type' },
     { key: 'site', label: 'Site', field: 'Launch_Site', displayNames: SITE_NAMES },
     { key: 'pad', label: 'Pad', field: 'Launch_Pad', displayNames: SITE_NAMES },
