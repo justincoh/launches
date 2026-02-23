@@ -4,6 +4,7 @@ import { tooltip } from '../utils/tooltip.js';
 import { categoryColor } from '../utils/colorScale.js';
 import { fmtNum } from '../utils/formatters.js';
 import { observeResize } from '../utils/responsive.js';
+import { COUNTRY_NAMES } from '../data/countryNames.js';
 
 export function createVehicleTimeline(container) {
   const section = document.getElementById('chart-vehicle-timeline');
@@ -126,14 +127,14 @@ export function createVehicleTimeline(container) {
     for (const s of states.slice(0, 10)) {
       legend.append('span')
         .attr('class', 'legend-item')
-        .html(`<span class="legend-swatch" style="background:${color(s)}"></span>${s}`);
+        .html(`<span class="legend-swatch" style="background:${color(s)}"></span>${COUNTRY_NAMES[s] || s}`);
     }
   }
 
   function showTip(event, d) {
     tooltip.show(
       `<div class="tt-title">${d.vehicle}</div>
-       <div class="tt-row"><span class="tt-label">Country</span><span class="tt-value">${d.state || 'Unknown'}</span></div>
+       <div class="tt-row"><span class="tt-label">Country</span><span class="tt-value">${(d.state && COUNTRY_NAMES[d.state]) || d.state || 'Unknown'}</span></div>
        <div class="tt-row"><span class="tt-label">Active</span><span class="tt-value">${d.firstYear}\u2013${d.lastYear}</span></div>
        <div class="tt-row"><span class="tt-label">Launches</span><span class="tt-value">${fmtNum(d.count)}</span></div>`,
       event
