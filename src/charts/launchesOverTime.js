@@ -10,42 +10,20 @@ export function createLaunchesOverTime(container) {
   const controls = section.querySelector('.chart-controls');
   const body = section.querySelector('.chart-body');
 
-  let mode = 'launches'; // 'launches' | 'payloads'
   let stacked = false;
   let stackField = 'SatState';
   let currentData = { launches: [], payloads: [] };
 
   // Toggle buttons
-  const launchBtn = document.createElement('button');
-  launchBtn.className = 'toggle-btn active';
-  launchBtn.textContent = 'Launches';
-  const payloadBtn = document.createElement('button');
-  payloadBtn.className = 'toggle-btn';
-  payloadBtn.textContent = 'Payloads';
   const stackBtn = document.createElement('button');
   stackBtn.className = 'toggle-btn';
   stackBtn.textContent = 'Stacked';
 
-  controls.append(launchBtn, payloadBtn, stackBtn);
+  controls.append(stackBtn);
 
-  launchBtn.addEventListener('click', () => {
-    mode = 'launches'; stacked = false;
-    launchBtn.classList.add('active');
-    payloadBtn.classList.remove('active');
-    stackBtn.classList.remove('active');
-    draw();
-  });
-  payloadBtn.addEventListener('click', () => {
-    mode = 'payloads'; stacked = false;
-    payloadBtn.classList.add('active');
-    launchBtn.classList.remove('active');
-    stackBtn.classList.remove('active');
-    draw();
-  });
   stackBtn.addEventListener('click', () => {
     stacked = !stacked;
     stackBtn.classList.toggle('active', stacked);
-    if (stacked) { mode = 'launches'; launchBtn.classList.add('active'); payloadBtn.classList.remove('active'); }
     draw();
   });
 
@@ -74,7 +52,7 @@ export function createLaunchesOverTime(container) {
   }
 
   function drawArea(g, launches, payloads, innerW, innerH, svg, w, h) {
-    const data = launchesByYear(launches, payloads, mode);
+    const data = launchesByYear(launches, payloads, 'launches');
     if (!data.length) return;
 
     const x = d3.scaleLinear()
@@ -158,7 +136,7 @@ export function createLaunchesOverTime(container) {
       hoverDot.attr('cx', x(d.year)).attr('cy', y(d.count)).style('display', null);
       tooltip.show(
         `<div class="tt-title">${d.year}</div>
-         <div class="tt-row"><span class="tt-label">${mode === 'payloads' ? 'Payloads' : 'Launches'}</span><span class="tt-value">${fmtNum(d.count)}</span></div>`,
+         <div class="tt-row"><span class="tt-label">Launches</span><span class="tt-value">${fmtNum(d.count)}</span></div>`,
         event
       );
     });
