@@ -29,17 +29,22 @@ export function createLaunchesOverTime(container) {
   const agencyBtn = document.createElement('button');
   agencyBtn.className = 'toggle-btn';
   agencyBtn.textContent = 'By Agency';
+  const vehicleBtn = document.createElement('button');
+  vehicleBtn.className = 'toggle-btn';
+  vehicleBtn.textContent = 'By Vehicle';
 
-  controls.append(areaBtn, barsBtn, stackBtn, agencyBtn);
+  controls.append(areaBtn, barsBtn, stackBtn, agencyBtn, vehicleBtn);
 
   function setMode(mode) {
     chartMode = mode;
     if (mode === 'stacked') stackField = 'SatState';
     else if (mode === 'stackedAgency') stackField = 'Agency';
+    else if (mode === 'stackedVehicle') stackField = 'LV_Type';
     areaBtn.classList.toggle('active', mode === 'area');
     barsBtn.classList.toggle('active', mode === 'bars');
     stackBtn.classList.toggle('active', mode === 'stacked');
     agencyBtn.classList.toggle('active', mode === 'stackedAgency');
+    vehicleBtn.classList.toggle('active', mode === 'stackedVehicle');
     draw();
   }
 
@@ -47,6 +52,7 @@ export function createLaunchesOverTime(container) {
   barsBtn.addEventListener('click', () => setMode('bars'));
   stackBtn.addEventListener('click', () => setMode('stacked'));
   agencyBtn.addEventListener('click', () => setMode('stackedAgency'));
+  vehicleBtn.addEventListener('click', () => setMode('stackedVehicle'));
 
   const margin = { top: 20, right: 20, bottom: 35, left: 50 };
 
@@ -65,7 +71,7 @@ export function createLaunchesOverTime(container) {
     const innerH = h - margin.top - margin.bottom;
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-    if (chartMode === 'stacked' || chartMode === 'stackedAgency') {
+    if (chartMode === 'stacked' || chartMode === 'stackedAgency' || chartMode === 'stackedVehicle') {
       drawStacked(g, launches, innerW, innerH, svg, w, h);
     } else if (chartMode === 'bars') {
       drawBars(g, launches, payloads, innerW, innerH);
@@ -266,7 +272,7 @@ export function createLaunchesOverTime(container) {
       .call(d3.axisLeft(y));
 
     // Legend
-    const nameMap = stackField === 'Agency' ? AGENCY_NAMES : COUNTRY_NAMES;
+    const nameMap = stackField === 'Agency' ? AGENCY_NAMES : stackField === 'SatState' ? COUNTRY_NAMES : {};
     const legend = d3.select(body).append('div').attr('class', 'chart-legend');
     for (const key of keys) {
       const displayName = nameMap[key] || key;
