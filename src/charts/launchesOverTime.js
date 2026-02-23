@@ -20,9 +20,6 @@ export function createLaunchesOverTime(container) {
   const areaBtn = document.createElement('button');
   areaBtn.className = 'toggle-btn active';
   areaBtn.textContent = 'Total';
-  const barsBtn = document.createElement('button');
-  barsBtn.className = 'toggle-btn';
-  barsBtn.textContent = 'Bars';
   const stackBtn = document.createElement('button');
   stackBtn.className = 'toggle-btn';
   stackBtn.textContent = 'By Country';
@@ -33,7 +30,7 @@ export function createLaunchesOverTime(container) {
   vehicleBtn.className = 'toggle-btn';
   vehicleBtn.textContent = 'By Vehicle';
 
-  controls.append(areaBtn, barsBtn, stackBtn, agencyBtn, vehicleBtn);
+  controls.append(areaBtn, stackBtn, agencyBtn, vehicleBtn);
 
   function setMode(mode) {
     chartMode = mode;
@@ -41,7 +38,6 @@ export function createLaunchesOverTime(container) {
     else if (mode === 'stackedAgency') stackField = 'Agency';
     else if (mode === 'stackedVehicle') stackField = 'LV_Type';
     areaBtn.classList.toggle('active', mode === 'area');
-    barsBtn.classList.toggle('active', mode === 'bars');
     stackBtn.classList.toggle('active', mode === 'stacked');
     agencyBtn.classList.toggle('active', mode === 'stackedAgency');
     vehicleBtn.classList.toggle('active', mode === 'stackedVehicle');
@@ -49,7 +45,6 @@ export function createLaunchesOverTime(container) {
   }
 
   areaBtn.addEventListener('click', () => setMode('area'));
-  barsBtn.addEventListener('click', () => setMode('bars'));
   stackBtn.addEventListener('click', () => setMode('stacked'));
   agencyBtn.addEventListener('click', () => setMode('stackedAgency'));
   vehicleBtn.addEventListener('click', () => setMode('stackedVehicle'));
@@ -73,8 +68,6 @@ export function createLaunchesOverTime(container) {
 
     if (chartMode === 'stacked' || chartMode === 'stackedAgency' || chartMode === 'stackedVehicle') {
       drawStacked(g, launches, innerW, innerH, svg, w, h);
-    } else if (chartMode === 'bars') {
-      drawBars(g, launches, payloads, innerW, innerH);
     } else {
       drawArea(g, launches, payloads, innerW, innerH, svg, w, h);
     }
@@ -175,56 +168,6 @@ export function createLaunchesOverTime(container) {
       hoverDot.style('display', 'none');
       tooltip.hide();
     });
-  }
-
-  function drawBars(g, launches, payloads, innerW, innerH) {
-    const data = launchesByYear(launches, payloads, 'launches');
-    if (!data.length) return;
-
-    const x = d3.scaleBand()
-      .domain(data.map(d => d.year))
-      .range([0, innerW])
-      .padding(0.15);
-
-    const y = d3.scaleLinear()
-      .domain([0, d3.max(data, d => d.count) * 1.1])
-      .nice()
-      .range([innerH, 0]);
-
-    g.append('g').attr('class', 'grid')
-      .call(d3.axisLeft(y).tickSize(-innerW).tickFormat(''));
-
-    g.selectAll('.bar')
-      .data(data)
-      .join('rect')
-      .attr('x', d => x(d.year))
-      .attr('y', d => y(d.count))
-      .attr('width', x.bandwidth())
-      .attr('height', d => innerH - y(d.count))
-      .attr('fill', '#6366f1')
-      .attr('rx', 1)
-      .on('mousemove', function(event, d) {
-        tooltip.show(
-          `<div class="tt-title">${d.year}</div>
-           <div class="tt-row"><span class="tt-label">Launches</span><span class="tt-value">${fmtNum(d.count)}</span></div>`,
-          event
-        );
-      })
-      .on('mouseleave', () => tooltip.hide());
-
-    // Axes — show fewer ticks to avoid crowding
-    const years = data.map(d => d.year);
-    const tickInterval = years.length > 40 ? 10 : years.length > 20 ? 5 : 1;
-    const tickValues = years.filter(y => y % tickInterval === 0);
-
-    g.append('g')
-      .attr('class', 'axis')
-      .attr('transform', `translate(0,${innerH})`)
-      .call(d3.axisBottom(x).tickValues(tickValues).tickFormat(d3.format('d')));
-
-    g.append('g')
-      .attr('class', 'axis')
-      .call(d3.axisLeft(y));
   }
 
   function drawStacked(g, launches, innerW, innerH, svg, w, h) {
