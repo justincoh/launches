@@ -4,6 +4,7 @@ import { tooltip } from '../utils/tooltip.js';
 import { categoryColor } from '../utils/colorScale.js';
 import { fmtNum } from '../utils/formatters.js';
 import { COUNTRY_NAMES } from '../data/countryNames.js';
+import { AGENCY_NAMES } from '../data/agencyNames.js';
 import { observeResize } from '../utils/responsive.js';
 
 export function createLaunchesOverTime(container) {
@@ -25,20 +26,27 @@ export function createLaunchesOverTime(container) {
   const stackBtn = document.createElement('button');
   stackBtn.className = 'toggle-btn';
   stackBtn.textContent = 'By Country';
+  const agencyBtn = document.createElement('button');
+  agencyBtn.className = 'toggle-btn';
+  agencyBtn.textContent = 'By Agency';
 
-  controls.append(areaBtn, barsBtn, stackBtn);
+  controls.append(areaBtn, barsBtn, stackBtn, agencyBtn);
 
   function setMode(mode) {
     chartMode = mode;
+    if (mode === 'stacked') stackField = 'SatState';
+    else if (mode === 'stackedAgency') stackField = 'Agency';
     areaBtn.classList.toggle('active', mode === 'area');
     barsBtn.classList.toggle('active', mode === 'bars');
     stackBtn.classList.toggle('active', mode === 'stacked');
+    agencyBtn.classList.toggle('active', mode === 'stackedAgency');
     draw();
   }
 
   areaBtn.addEventListener('click', () => setMode('area'));
   barsBtn.addEventListener('click', () => setMode('bars'));
   stackBtn.addEventListener('click', () => setMode('stacked'));
+  agencyBtn.addEventListener('click', () => setMode('stackedAgency'));
 
   const margin = { top: 20, right: 20, bottom: 35, left: 50 };
 
@@ -57,7 +65,7 @@ export function createLaunchesOverTime(container) {
     const innerH = h - margin.top - margin.bottom;
     const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-    if (chartMode === 'stacked') {
+    if (chartMode === 'stacked' || chartMode === 'stackedAgency') {
       drawStacked(g, launches, innerW, innerH, svg, w, h);
     } else if (chartMode === 'bars') {
       drawBars(g, launches, payloads, innerW, innerH);
@@ -258,9 +266,10 @@ export function createLaunchesOverTime(container) {
       .call(d3.axisLeft(y));
 
     // Legend
+    const nameMap = stackField === 'Agency' ? AGENCY_NAMES : COUNTRY_NAMES;
     const legend = d3.select(body).append('div').attr('class', 'chart-legend');
     for (const key of keys) {
-      const displayName = COUNTRY_NAMES[key] || key;
+      const displayName = nameMap[key] || key;
       legend.append('span')
         .attr('class', 'legend-item')
         .html(`<span class="legend-swatch" style="background:${color(key)}"></span>${displayName}`);
@@ -289,7 +298,7 @@ export function createLaunchesOverTime(container) {
 
       hoverLine.attr('x1', x(d.year)).attr('x2', x(d.year)).style('display', null);
       const rows = keys.map(k =>
-        `<div class="tt-row"><span class="tt-label"><span class="tt-swatch" style="background:${color(k)}"></span>${COUNTRY_NAMES[k] || k}</span><span class="tt-value">${d[k]}</span></div>`
+        `<div class="tt-row"><span class="tt-label"><span class="tt-swatch" style="background:${color(k)}"></span>${nameMap[k] || k}</span><span class="tt-value">${d[k]}</span></div>`
       ).join('');
       tooltip.show(`<div class="tt-title">${d.year}</div>${rows}`, event);
     });
