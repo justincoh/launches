@@ -3,6 +3,7 @@ import { launchesByYear, launchesByYearStacked } from '../data/aggregator.js';
 import { tooltip } from '../utils/tooltip.js';
 import { categoryColor } from '../utils/colorScale.js';
 import { fmtNum } from '../utils/formatters.js';
+import { COUNTRY_NAMES } from '../data/countryNames.js';
 import { observeResize } from '../utils/responsive.js';
 
 export function createLaunchesOverTime(container) {
@@ -195,9 +196,10 @@ export function createLaunchesOverTime(container) {
     // Legend
     const legend = d3.select(body).append('div').attr('class', 'chart-legend');
     for (const key of keys) {
+      const displayName = COUNTRY_NAMES[key] || key;
       legend.append('span')
         .attr('class', 'legend-item')
-        .html(`<span class="legend-swatch" style="background:${color(key)}"></span>${key}`);
+        .html(`<span class="legend-swatch" style="background:${color(key)}"></span>${displayName}`);
     }
 
     // Hover
@@ -223,7 +225,7 @@ export function createLaunchesOverTime(container) {
 
       hoverLine.attr('x1', x(d.year)).attr('x2', x(d.year)).style('display', null);
       const rows = keys.map(k =>
-        `<div class="tt-row"><span class="tt-label"><span class="tt-swatch" style="background:${color(k)}"></span>${k}</span><span class="tt-value">${d[k]}</span></div>`
+        `<div class="tt-row"><span class="tt-label"><span class="tt-swatch" style="background:${color(k)}"></span>${COUNTRY_NAMES[k] || k}</span><span class="tt-value">${d[k]}</span></div>`
       ).join('');
       tooltip.show(`<div class="tt-title">${d.year}</div>${rows}`, event);
     });
