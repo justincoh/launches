@@ -177,24 +177,60 @@
   color: var(--accent);
 }
 
-.filter-range {
+.dual-range {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.5rem;
   font-size: 0.8rem;
   color: var(--text-muted);
+  user-select: none;
 }
 
-.filter-range input[type="range"] {
-  width: 80px;
-  accent-color: var(--accent);
-}
-
-.filter-range .range-label {
+.dual-range .range-label {
   font-family: var(--mono);
   font-size: 0.75rem;
   min-width: 2.5rem;
   text-align: center;
+}
+
+.dual-range-track {
+  position: relative;
+  width: 140px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.dual-range-fill {
+  position: absolute;
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.dual-range-thumb {
+  position: absolute;
+  top: 50%;
+  width: 14px;
+  height: 14px;
+  background: var(--accent);
+  border: 2px solid var(--surface);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  z-index: 2;
+  transition: box-shadow .15s;
+}
+
+.dual-range-thumb:hover,
+.dual-range-thumb:active {
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+}
+
+.dual-range-thumb:active {
+  cursor: grabbing;
 }
 
 .clear-btn {
@@ -292,7 +328,7 @@
   .filter-bar .filter-item,
   .filter-bar .typeahead-wrap,
   .filter-bar .filter-search-input,
-  .filter-bar .filter-range,
+  .filter-bar .dual-range,
   .filter-bar .clear-btn {
     display: none;
   }

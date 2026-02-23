@@ -139,56 +139,20 @@ export function initFilterBar(container, launches) {
   mobileSearchGroup.appendChild(mobileSearchInput);
   overlay.appendChild(mobileSearchGroup);
 
-  // Year range
-  const rangeDiv = document.createElement('div');
-  rangeDiv.className = 'filter-range';
-
-  const minLabel = document.createElement('span');
-  minLabel.className = 'range-label';
-  minLabel.textContent = '1957';
-
-  const minSlider = document.createElement('input');
-  minSlider.type = 'range';
-  minSlider.min = 1957;
-  minSlider.max = 2026;
-  minSlider.value = 1957;
-
-  const sep = document.createElement('span');
-  sep.textContent = '\u2013';
-
-  const maxLabel = document.createElement('span');
-  maxLabel.className = 'range-label';
-  maxLabel.textContent = '2026';
-
-  const maxSlider = document.createElement('input');
-  maxSlider.type = 'range';
-  maxSlider.min = 1957;
-  maxSlider.max = 2026;
-  maxSlider.value = 2026;
-
-  rangeDiv.append(minLabel, minSlider, sep, maxSlider, maxLabel);
-  container.appendChild(rangeDiv);
-
-  minSlider.addEventListener('input', () => {
-    const v = +minSlider.value;
-    if (v > +maxSlider.value) minSlider.value = maxSlider.value;
-    minLabel.textContent = minSlider.value;
-    filterState.set({ yearMin: +minSlider.value });
+  // Year range — dual-thumb slider
+  const rangeSlider = createDualRangeSlider(1957, 2026, 1957, 2026, (min, max) => {
+    filterState.set({ yearMin: min, yearMax: max });
   });
-
-  maxSlider.addEventListener('input', () => {
-    const v = +maxSlider.value;
-    if (v < +minSlider.value) maxSlider.value = minSlider.value;
-    maxLabel.textContent = maxSlider.value;
-    filterState.set({ yearMax: +maxSlider.value });
-  });
+  container.appendChild(rangeSlider.el);
 
   // Mobile year range
   const mobileRangeGroup = document.createElement('div');
   mobileRangeGroup.className = 'filter-group';
   mobileRangeGroup.innerHTML = '<label>Year Range</label>';
-  const mobileRangeDiv = rangeDiv.cloneNode(true);
-  mobileRangeGroup.appendChild(mobileRangeDiv);
+  const mobileRangeSlider = createDualRangeSlider(1957, 2026, 1957, 2026, (min, max) => {
+    filterState.set({ yearMin: min, yearMax: max });
+  });
+  mobileRangeGroup.appendChild(mobileRangeSlider.el);
   overlay.appendChild(mobileRangeGroup);
 
   // Clear all
@@ -199,10 +163,8 @@ export function initFilterBar(container, launches) {
     filterState.reset();
     searchInput.value = '';
     mobileSearchInput.value = '';
-    minSlider.value = 1957;
-    maxSlider.value = 2026;
-    minLabel.textContent = '1957';
-    maxLabel.textContent = '2026';
+    rangeSlider.reset();
+    mobileRangeSlider.reset();
   });
   container.appendChild(clearBtn);
 
@@ -289,4 +251,106 @@ function updateTypeaheadHighlight(items, idx) {
 
 function escapeHtml(str) {
   return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function createDualRangeSlider(absMin, absMax, initMin, initMax, onChange) {
+  let curMin = initMin;
+  let curMax = initMax;
+
+  const el = document.createElement('div');
+  el.className = 'dual-range';
+
+  const minLabel = document.createElement('span');
+  minLabel.className = 'range-label';
+  minLabel.textContent = curMin;
+
+  const maxLabel = document.createElement('span');
+  maxLabel.className = 'range-label';
+  maxLabel.textContent = curMax;
+
+  const track = document.createElement('div');
+  track.className = 'dual-range-track';
+
+  const fill = document.createElement('div');
+  fill.className = 'dual-range-fill';
+  track.appendChild(fill);
+
+  const thumbMin = document.createElement('div');
+  thumbMin.className = 'dual-range-thumb';
+  thumbMin.tabIndex = 0;
+  track.appendChild(thumbMin);
+
+  const thumbMax = document.createElement('div');
+  thumbMax.className = 'dual-range-thumb';
+  thumbMax.tabIndex = 0;
+  track.appendChild(thumbMax);
+
+  el.append(minLabel, track, maxLabel);
+
+  function valToFrac(val) {
+    return (val - absMin) / (absMax - absMin);
+  }
+
+  function fracToVal(frac) {
+    return Math.round(absMin + frac * (absMax - absMin));
+  }
+
+  function updatePositions() {
+    const minFrac = valToFrac(curMin) * 100;
+    const maxFrac = valToFrac(curMax) * 100;
+    thumbMin.style.left = minFrac + '%';
+    thumbMax.style.left = maxFrac + '%';
+    fill.style.left = minFrac + '%';
+    fill.style.width = (maxFrac - minFrac) + '%';
+    minLabel.textContent = curMin;
+    maxLabel.textContent = curMax;
+  }
+
+  function startDrag(thumb, isMin) {
+    const onMove = (e) => {
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const rect = track.getBoundingClientRect();
+      let frac = (clientX - rect.left) / rect.width;
+      frac = Math.max(0, Math.min(1, frac));
+      let val = fracToVal(frac);
+
+      if (isMin) {
+        val = Math.min(val, curMax);
+        curMin = val;
+      } else {
+        val = Math.max(val, curMin);
+        curMax = val;
+      }
+      updatePositions();
+      onChange(curMin, curMax);
+    };
+
+    const onUp = () => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+      document.removeEventListener('touchmove', onMove);
+      document.removeEventListener('touchend', onUp);
+    };
+
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+    document.addEventListener('touchmove', onMove, { passive: true });
+    document.addEventListener('touchend', onUp);
+  }
+
+  thumbMin.addEventListener('mousedown', (e) => { e.preventDefault(); startDrag(thumbMin, true); });
+  thumbMin.addEventListener('touchstart', (e) => { startDrag(thumbMin, true); }, { passive: true });
+  thumbMax.addEventListener('mousedown', (e) => { e.preventDefault(); startDrag(thumbMax, false); });
+  thumbMax.addEventListener('touchstart', (e) => { startDrag(thumbMax, false); }, { passive: true });
+
+  updatePositions();
+
+  return {
+    el,
+    reset() {
+      curMin = initMin;
+      curMax = initMax;
+      updatePositions();
+    }
+  };
 }
