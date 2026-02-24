@@ -58,3 +58,11 @@ The pattern: pass a `displayNames` object through config, then look up with `dis
 Three CSS files imported in `main.js`: `main.css` (layout, variables, grid), `filters.css` (filter bar, dropdowns, dual-range slider, mobile overlay), `charts.css` (tooltips, legends, axes, chart-specific styles). Dark theme with CSS custom properties.
 
 Mobile breakpoint at 768px: charts go single-column, filter bar collapses to overlay.
+
+### Deployment
+
+Hosted on GitHub Pages at `justincoh.github.io/launches/`.
+
+- **`deploy.yml`** — Builds and deploys to Pages on every push to `main`. Also callable via `workflow_call` so other workflows can reuse it.
+- **`update-data.yml`** — Daily cron (8:00 UTC) fetches the latest TSV from `planet4589.org`, commits if changed, then calls `deploy.yml` to redeploy.
+- **Base path** — `vite.config.js` sets `base: '/launches/'` only for production builds (`command === 'build'`), so local dev uses `/`.
