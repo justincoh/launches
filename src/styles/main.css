@@ -164,6 +164,25 @@ select.chart-select {
   cursor: pointer;
 }
 
+.app-footer {
+  text-align: center;
+  padding: 2rem 0 1rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.app-footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.app-footer a:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 768px) {
   #app { padding: 0.5rem; }
 
