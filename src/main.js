@@ -10,6 +10,7 @@ import { createLaunchesOverTime } from './charts/launchesOverTime.js';
 import { createSuccessFailure } from './charts/successFailure.js';
 import { createTopRankings } from './charts/topRankings.js';
 import { createVehicleTimeline } from './charts/vehicleTimeline.js';
+import { SITE_NAMES } from './data/siteNames.js';
 
 async function init() {
   const loadingEl = document.getElementById('loading');
@@ -45,6 +46,16 @@ async function init() {
 
     // Initial render
     chartManager.initialRender();
+
+    // Populate latest record in footer
+    const latest = launches[launches.length - 1];
+    if (latest && latest.date) {
+      const dateStr = latest.date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const site = SITE_NAMES[latest.Launch_Site] || latest.Launch_Site || '';
+      const vehicle = latest.LV_Type || '';
+      const parts = [dateStr, vehicle, site ? `launch from ${site}` : ''].filter(Boolean);
+      document.getElementById('latest-record').textContent = parts.join(' ');
+    }
 
   } catch (err) {
     loadingEl.innerHTML = `<p style="color: var(--failure);">Failed to load data: ${err.message}</p>`;
