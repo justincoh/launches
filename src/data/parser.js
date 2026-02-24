@@ -5,7 +5,7 @@ const HEADERS = [
   'LVState', 'Launch_Code', 'LTCite'
 ];
 
-export async function fetchAndParse(url = '/launchlog.tsv') {
+export async function fetchAndParse(url = `${import.meta.env.BASE_URL}launchlog.tsv`) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to load data: ${res.status}`);
   const text = await res.text();
