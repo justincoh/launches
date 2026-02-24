@@ -44,6 +44,7 @@ body {
 }
 
 .app-header {
+  position: relative;
   text-align: center;
   padding: 1.5rem 0 1rem;
 }
@@ -162,6 +163,60 @@ select.chart-select {
   border-radius: 4px;
   font-size: 0.75rem;
   cursor: pointer;
+}
+
+.info-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 0;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all .15s;
+}
+
+.info-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.info-popover {
+  display: none;
+  position: absolute;
+  top: calc(1.5rem + 38px);
+  right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  width: 380px;
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  box-shadow: var(--shadow);
+  z-index: 150;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-popover.open {
+  display: flex;
+}
+
+.info-popover a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.info-popover a:hover {
+  text-decoration: underline;
 }
 
 .app-footer {

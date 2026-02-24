@@ -11,6 +11,13 @@
     <header class="app-header">
       <h1>Space Launch Stats</h1>
       <p class="subtitle">Every orbital launch attempt, 1957 &ndash; 2026</p>
+      <button class="info-btn" id="info-btn" aria-label="About this site">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      </button>
+      <div class="info-popover" id="info-popover">
+        <p>This site was made possible by the meticulous work of <a href="https://planet4589.org/space/log/launch.html" target="_blank" rel="noopener">Dr. Jonathan McDowell</a>.</p>
+        <p>Found a problem? Have an idea for an enhancement? Open <a target="_blank" href="https://github.com/justincoh/launches/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen">an issue on github and let me know</a>. Or you can <a target="_blank" href="https://justinjoyce.dev/standing-invitation/">email me here</a>.</p>
+      </div>
     </header>
 
     <div id="filter-bar" class="filter-bar"></div>
@@ -55,9 +62,8 @@
     </main>
 
     <footer class="app-footer">
-      <p>This site made possible by the meticulous work of <a href="https://planet4589.org/space/log/launch.html" target="_blank" rel="noopener">Dr. Jonathan McDowell</a>.</p>
-      <p>Found a problem? Have an idea for an enhancement? Open <a target="_blank" href="https://github.com/justincoh/launches/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen">an issue on github and let me know</a>. Or you can <a target="_blank" href="https://justinjoyce.dev/standing-invitation/">email me here</a>.</p>
-      <p>Latest record: <span id="latest-record"></span>. Updates daily.</p>
+      <p>Latest record: <span id="latest-record"></span>.</p>
+      <p>Updates daily.</p>
     </footer>
   </div>
 

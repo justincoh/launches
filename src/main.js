@@ -12,6 +12,19 @@ import { createTopRankings } from './charts/topRankings.js';
 import { createVehicleTimeline } from './charts/vehicleTimeline.js';
 import { SITE_NAMES } from './data/siteNames.js';
 
+// Info popover toggle
+const infoBtn = document.getElementById('info-btn');
+const infoPopover = document.getElementById('info-popover');
+infoBtn.addEventListener('click', (e) => {
+  e.stopPropagation();
+  infoPopover.classList.toggle('open');
+});
+document.addEventListener('click', (e) => {
+  if (!infoPopover.contains(e.target)) {
+    infoPopover.classList.remove('open');
+  }
+});
+
 async function init() {
   const loadingEl = document.getElementById('loading');
   const dashboardEl = document.getElementById('dashboard');
