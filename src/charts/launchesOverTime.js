@@ -50,6 +50,7 @@ export function createLaunchesOverTime(container) {
   vehicleBtn.addEventListener('click', () => setMode('stackedVehicle'));
 
   const margin = { top: 20, right: 20, bottom: 35, left: 50 };
+  const isMobile = () => window.innerWidth <= 768;
 
   function draw() {
     body.innerHTML = '';
@@ -116,10 +117,12 @@ export function createLaunchesOverTime(container) {
       .attr('d', line);
 
     // Axes
+    const xAxis = d3.axisBottom(x).tickFormat(d3.format('d'));
+    if (isMobile()) xAxis.ticks(5);
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
-      .call(d3.axisBottom(x).tickFormat(d3.format('d')));
+      .call(xAxis);
 
     g.append('g')
       .attr('class', 'axis')
@@ -205,10 +208,12 @@ export function createLaunchesOverTime(container) {
       .attr('opacity', 0.75)
       .attr('d', area);
 
+    const xAxis = d3.axisBottom(x).tickFormat(d3.format('d'));
+    if (isMobile()) xAxis.ticks(5);
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
-      .call(d3.axisBottom(x).tickFormat(d3.format('d')));
+      .call(xAxis);
 
     g.append('g')
       .attr('class', 'axis')
