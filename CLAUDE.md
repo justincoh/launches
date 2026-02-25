@@ -61,8 +61,8 @@ Mobile breakpoint at 768px: charts go single-column, filter bar collapses to ove
 
 ### Deployment
 
-Hosted on GitHub Pages at `justincoh.github.io/launches/`.
+Hosted on GitHub Pages at `launchstats.info`.
 
 - **`deploy.yml`** — Builds and deploys to Pages on every push to `main`. Also callable via `workflow_call` so other workflows can reuse it.
 - **`update-data.yml`** — Daily cron (8:00 UTC) fetches the latest TSV from `planet4589.org`, commits if changed, then calls `deploy.yml` to redeploy.
-- **Base path** — `vite.config.js` sets `base: '/launches/'` only for production builds (`command === 'build'`), so local dev uses `/`.
+- **Custom domain** — `public/CNAME` sets `launchstats.info`. Base path is `/` (no subdirectory).
