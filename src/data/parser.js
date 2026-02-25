@@ -6,7 +6,7 @@ const HEADERS = [
 ];
 
 export async function fetchAndParse(url = `${import.meta.env.BASE_URL}launchlog.tsv`) {
-  const res = await fetch(url);
+  const res = await fetch(`${url}?v=${Date.now()}`);
   if (!res.ok) throw new Error(`Failed to load data: ${res.status}`);
   const text = await res.text();
   return parseTSV(text);
