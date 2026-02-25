@@ -143,7 +143,7 @@ body {
   color: var(--text-muted);
   padding: 0.25rem 0.6rem;
   border-radius: 4px;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all .15s;
 }
@@ -161,7 +161,7 @@ select.chart-select {
   color: var(--text);
   padding: 0.25rem 0.5rem;
   border-radius: 4px;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
@@ -250,6 +250,10 @@ select.chart-select {
 
   .chart-half {
     grid-column: span 1;
+  }
+
+  #chart-vehicle-timeline {
+    display: none;
   }
 
   :root {

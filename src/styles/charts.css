@@ -5,7 +5,7 @@
   border: 1px solid var(--border);
   border-radius: 6px;
   padding: 0.5rem 0.7rem;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   color: var(--text);
   pointer-events: none;
   box-shadow: var(--shadow);
@@ -53,7 +53,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 1rem;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   margin-top: 0.5rem;
   justify-content: center;
 }
