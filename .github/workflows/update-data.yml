@@ -7,8 +7,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   update:
@@ -34,8 +32,3 @@ jobs:
           git commit -m "Update launch data $(date -u +%Y-%m-%d)"
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
-
-  deploy:
-    needs: update
-    if: needs.update.outputs.changed == 'true'
-    uses: ./.github/workflows/deploy.yml
