@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Commands
 
-- **Dev server:** `npm run dev` (Vite, port 5173)
+- **Dev server:** `npm run dev` (Vite, port 5174)
 - **Build:** `npm run build` (outputs to `dist/`)
 - **Preview production build:** `npm run preview`
 - No test framework is configured.
