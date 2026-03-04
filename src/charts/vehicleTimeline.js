@@ -13,7 +13,7 @@ export function createVehicleTimeline(container) {
 
   let currentLaunches = [];
   let sortMode = 'count';
-  let topCount = 30;
+  let topCount = 10;
 
   const sortSelect = document.createElement('select');
   sortSelect.className = 'chart-select';
