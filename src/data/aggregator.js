@@ -82,7 +82,8 @@ export function launchesByYearStacked(launches, field = 'SatState', topN = 5) {
     bucket[key] = (bucket[key] || 0) + 1;
   }
 
-  const keys = [...topKeys, 'Other'];
+  const hasOther = [...yearMap.values()].some(bucket => bucket['Other'] > 0);
+  const keys = hasOther ? [...topKeys, 'Other'] : [...topKeys];
   const result = [];
   for (const [year, bucket] of yearMap) {
     const row = { year };
