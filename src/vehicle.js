@@ -10,6 +10,7 @@ import { createVehicleBarChart } from './charts/vehicleBarChart.js';
 import { createSuccessFailure } from './charts/successFailure.js';
 import { createTopRankings } from './charts/topRankings.js';
 import { fmtDate } from './utils/formatters.js';
+import { AGENCY_NAMES } from './data/agencyNames.js';
 
 const params = new URLSearchParams(window.location.search);
 const vehicleName = params.get('v');
@@ -60,7 +61,9 @@ async function init() {
     }
 
     // Populate header
-    nameEl.textContent = vehicleName;
+    const agencyCode = vehicleLaunches[0].Agency || '';
+    const agencyName = AGENCY_NAMES[agencyCode] || agencyCode;
+    nameEl.textContent = agencyName ? `${vehicleName} – ${agencyName}` : vehicleName;
     document.title = `${vehicleName} - Space Launch Stats`;
 
     const withDates = vehicleLaunches.filter(d => d.date);
