@@ -46,12 +46,30 @@ The pattern: pass a `displayNames` object through config, then look up with `dis
 
 | UI concept | TSV column | Filter key |
 |-----------|-----------|------------|
-| Country | `SatState` | `country` |
+| Country | `LVState` | `country` |
 | Agency | `Agency` | `agency` |
 | Vehicle | `LV_Type` | `vehicle` |
 | Site | `Launch_Site` | `site` |
 | Pad | `Launch_Pad` | `pad` |
 | Outcome | `Launch_Code` | (derived in normalizer: OS/DS→Success, OF→Failure, XS→Suborbital) |
+
+### Detail Pages (MPA)
+
+Vite is configured as `appType: 'mpa'` with separate HTML entry points. Each detail page lives in its own directory with an `index.html` and a corresponding `src/<page>.js` entry.
+
+| Page | URL pattern | Entry | Query param |
+|------|------------|-------|-------------|
+| Vehicle | `/vehicle?v=<LV_Type>` | `src/vehicle.js` | `v` |
+| Agency | `/agency?a=<Agency>` | `src/agency.js` | `a` |
+
+Detail pages reuse the same chart components with options:
+- `createSuccessFailure(container, { donutOnly, excludeDimensions })` — vehicle page uses `donutOnly`, agency page excludes all but `LV_Type`
+- `createTopRankings(container, { excludePanels, onBarClick })` — both pages exclude irrelevant panels
+- `createVehicleBarChart(section)` — stacked success/failure bar chart by year, reused on both detail pages
+
+Each detail page has a typeahead search (`vehicleTypeahead.js`, `agencyTypeahead.js`) and a `dualRangeSlider.js` for year filtering.
+
+Clicking vehicle/agency bars on the main page navigates to the respective detail page.
 
 ### CSS Structure
 
