@@ -100,6 +100,7 @@ export function createTopRankings(container, options = {}) {
       .on('click', (event, d) => {
         if (onBarClick) onBarClick(panel.filterKey, d.label);
         else if (panel.filterKey === 'vehicle') window.location.href = '/vehicle?v=' + encodeURIComponent(d.label);
+        else if (panel.filterKey === 'agency') window.location.href = '/agency?a=' + encodeURIComponent(d.label);
         else filterState.set({ [panel.filterKey]: d.label });
       })
       .on('mousemove', (event, d) => {
@@ -137,6 +138,7 @@ export function createTopRankings(container, options = {}) {
       .on('click', (event, label) => {
         if (onBarClick) onBarClick(panel.filterKey, label);
         else if (panel.filterKey === 'vehicle') window.location.href = '/vehicle?v=' + encodeURIComponent(label);
+        else if (panel.filterKey === 'agency') window.location.href = '/agency?a=' + encodeURIComponent(label);
         else filterState.set({ [panel.filterKey]: label });
       });
   }

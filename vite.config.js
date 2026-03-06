@@ -13,6 +13,11 @@ function mpaRedirect() {
           res.end();
           return;
         }
+        if (url.pathname === '/agency') {
+          res.writeHead(301, { Location: '/agency/' + url.search });
+          res.end();
+          return;
+        }
         next();
       });
     },
@@ -33,6 +38,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         vehicle: resolve(__dirname, 'vehicle/index.html'),
+        agency: resolve(__dirname, 'agency/index.html'),
       },
     },
   },
