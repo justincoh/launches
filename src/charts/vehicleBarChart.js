@@ -28,7 +28,7 @@ export function createVehicleBarChart(section) {
 
     if (!data.length) return;
 
-    const keys = ['Success', 'Failure', 'Suborbital'];
+    const keys = ['Success', 'Failure', 'Suborbital'].filter(k => data.some(d => d[k]));
     const w = body.clientWidth || 600;
     const h = 350;
     const margin = { top: 20, right: 20, bottom: 35, left: 50 };
