@@ -13,7 +13,7 @@ export function createLaunchesOverTime(container) {
   const body = section.querySelector('.chart-body');
 
   let chartMode = 'area'; // 'area' | 'bars' | 'stacked'
-  let stackField = 'SatState';
+  let stackField = 'LVState';
   let currentData = { launches: [], payloads: [] };
 
   // Toggle buttons
@@ -34,7 +34,7 @@ export function createLaunchesOverTime(container) {
 
   function setMode(mode) {
     chartMode = mode;
-    if (mode === 'stacked') stackField = 'SatState';
+    if (mode === 'stacked') stackField = 'LVState';
     else if (mode === 'stackedAgency') stackField = 'Agency';
     else if (mode === 'stackedVehicle') stackField = 'LV_Type';
     areaBtn.classList.toggle('active', mode === 'area');
@@ -220,7 +220,7 @@ export function createLaunchesOverTime(container) {
       .call(d3.axisLeft(y));
 
     // Legend
-    const nameMap = stackField === 'Agency' ? AGENCY_NAMES : stackField === 'SatState' ? COUNTRY_NAMES : {};
+    const nameMap = stackField === 'Agency' ? AGENCY_NAMES : stackField === 'LVState' ? COUNTRY_NAMES : {};
     const legend = d3.select(body).append('div').attr('class', 'chart-legend');
     for (const key of keys) {
       const displayName = nameMap[key] || key;

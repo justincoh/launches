@@ -10,7 +10,7 @@ import { AGENCY_NAMES } from '../data/agencyNames.js';
 import { SITE_NAMES } from '../data/siteNames.js';
 
 const PANELS = [
-  { title: 'Top Countries', field: 'SatState', filterKey: 'country', displayNames: COUNTRY_NAMES },
+  { title: 'Top Countries', field: 'LVState', filterKey: 'country', displayNames: COUNTRY_NAMES },
   { title: 'Top Agencies', field: 'Agency', filterKey: 'agency', displayNames: AGENCY_NAMES },
   { title: 'Top Vehicles', field: 'LV_Type', filterKey: 'vehicle' },
   { title: 'Top Sites', field: 'Launch_Site', filterKey: 'site', displayNames: SITE_NAMES },

@@ -3,8 +3,8 @@ export function filterData(launches, payloads, filters) {
   let fp = payloads;
 
   if (filters.country) {
-    fl = fl.filter(d => d.SatState === filters.country);
-    fp = fp.filter(d => d.SatState === filters.country);
+    fl = fl.filter(d => d.LVState === filters.country);
+    fp = fp.filter(d => d.LVState === filters.country);
   }
   if (filters.agency) {
     fl = fl.filter(d => d.Agency === filters.agency);

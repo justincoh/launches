@@ -12,7 +12,7 @@ export function initFilterBar(container, launches) {
   container.innerHTML = '';
 
   const configs = [
-    { key: 'country', label: 'Country', field: 'SatState', displayNames: COUNTRY_NAMES },
+    { key: 'country', label: 'Country', field: 'LVState', displayNames: COUNTRY_NAMES },
     { key: 'agency', label: 'Agency', field: 'Agency', displayNames: AGENCY_NAMES },
     { key: 'vehicle', label: 'Vehicle', field: 'LV_Type' },
     { key: 'site', label: 'Site', field: 'Launch_Site', displayNames: SITE_NAMES },

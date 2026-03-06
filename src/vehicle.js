@@ -92,7 +92,7 @@ async function init() {
       donutOnly: true,
     });
     const trChart = createTopRankings(document, {
-      excludePanels: ['vehicle', 'agency'],
+      excludePanels: ['vehicle', 'agency', 'country'],
       onBarClick: () => {},  // no-op on vehicle page
     });
 

@@ -7,7 +7,7 @@ import { observeResize } from '../utils/responsive.js';
 
 const ALL_DIMENSIONS = [
   { value: 'decade', label: 'By Decade' },
-  { value: 'SatState', label: 'By Country' },
+  { value: 'LVState', label: 'By Country' },
   { value: 'Agency', label: 'By Agency' },
   { value: 'LV_Type', label: 'By Vehicle' },
 ];
