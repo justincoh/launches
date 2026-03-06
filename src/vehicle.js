@@ -61,9 +61,10 @@ async function init() {
     }
 
     // Populate header
+    nameEl.textContent = vehicleName;
     const agencyCode = vehicleLaunches[0].Agency || '';
     const agencyName = AGENCY_NAMES[agencyCode] || agencyCode;
-    nameEl.textContent = agencyName ? `${vehicleName} – ${agencyName}` : vehicleName;
+    if (agencyName) document.getElementById('vehicle-agency').textContent = agencyName;
     document.title = `${vehicleName} - Space Launch Stats`;
 
     const withDates = vehicleLaunches.filter(d => d.date);

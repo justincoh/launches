@@ -232,6 +232,13 @@ select.chart-select {
   text-decoration: underline;
 }
 
+.vehicle-agency {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin: 0.25rem 0 0;
+}
+
 .vehicle-search-wrap {
   margin: 0.75rem auto 0;
   max-width: 300px;
