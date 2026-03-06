@@ -219,6 +219,40 @@ select.chart-select {
   text-decoration: underline;
 }
 
+.back-link {
+  position: absolute;
+  top: 1.5rem;
+  left: 0;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.85rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.vehicle-search-wrap {
+  margin: 0.75rem auto 0;
+  max-width: 300px;
+}
+
+.vehicle-search-wrap .filter-search-input {
+  width: 100%;
+}
+
+.not-found-msg {
+  text-align: center;
+  padding: 3rem 0 1rem;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+#not-found .vehicle-search-wrap {
+  margin: 0 auto;
+  max-width: 300px;
+}
+
 .app-footer {
   text-align: center;
   padding: 2rem 0 1rem;

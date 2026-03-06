@@ -224,9 +224,15 @@ export function createLaunchesOverTime(container) {
     const legend = d3.select(body).append('div').attr('class', 'chart-legend');
     for (const key of keys) {
       const displayName = nameMap[key] || key;
-      legend.append('span')
+      const item = legend.append('span')
         .attr('class', 'legend-item')
         .html(`<span class="legend-swatch" style="background:${color(key)}"></span>${displayName}`);
+      if (stackField === 'LV_Type' && key !== 'Other') {
+        item.style('cursor', 'pointer')
+          .on('click', () => {
+            window.location.href = '/vehicle?v=' + encodeURIComponent(key);
+          });
+      }
     }
 
     // Hover

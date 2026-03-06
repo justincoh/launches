@@ -5,31 +5,46 @@ import { outcomeColors } from '../utils/colorScale.js';
 import { fmtNum, fmtPct } from '../utils/formatters.js';
 import { observeResize } from '../utils/responsive.js';
 
-export function createSuccessFailure(container) {
-  const section = document.getElementById('chart-success-failure');
+const ALL_DIMENSIONS = [
+  { value: 'decade', label: 'By Decade' },
+  { value: 'SatState', label: 'By Country' },
+  { value: 'Agency', label: 'By Agency' },
+  { value: 'LV_Type', label: 'By Vehicle' },
+];
+
+export function createSuccessFailure(container, options = {}) {
+  const section = container.querySelector
+    ? container.querySelector('#chart-success-failure') || document.getElementById('chart-success-failure')
+    : document.getElementById('chart-success-failure');
   const controls = section.querySelector('.chart-controls');
   const body = section.querySelector('.chart-body');
 
-  let dim = 'decade';
+  const excludeDimensions = options.excludeDimensions || [];
+  const donutOnly = options.donutOnly || false;
+  const dims = ALL_DIMENSIONS.filter(d => !excludeDimensions.includes(d.value));
+
+  let dim = dims[0]?.value || 'decade';
   let currentLaunches = [];
 
-  const dimSelect = document.createElement('select');
-  dimSelect.className = 'chart-select';
-  dimSelect.innerHTML = `
-    <option value="decade">By Decade</option>
-    <option value="SatState">By Country</option>
-    <option value="Agency">By Agency</option>
-    <option value="LV_Type">By Vehicle</option>
-  `;
-  controls.appendChild(dimSelect);
-  dimSelect.addEventListener('change', () => {
-    dim = dimSelect.value;
-    draw();
-  });
+  if (!donutOnly) {
+    const dimSelect = document.createElement('select');
+    dimSelect.className = 'chart-select';
+    dimSelect.innerHTML = dims.map(d =>
+      `<option value="${d.value}">${d.label}</option>`
+    ).join('');
+    controls.appendChild(dimSelect);
+    dimSelect.addEventListener('change', () => {
+      dim = dimSelect.value;
+      draw();
+    });
+  }
 
   function draw() {
     body.innerHTML = '';
-    const w = body.clientWidth || 600;
+    if (donutOnly) {
+      drawDonut(body, currentLaunches);
+      return;
+    }
     const grid = document.createElement('div');
     grid.className = 'success-failure-grid';
     body.appendChild(grid);
@@ -40,6 +55,7 @@ export function createSuccessFailure(container) {
 
   function drawDonut(grid, launches) {
     const container = document.createElement('div');
+    if (donutOnly) container.style.maxWidth = '220px';
     grid.appendChild(container);
 
     const data = outcomeBreakdown(launches);

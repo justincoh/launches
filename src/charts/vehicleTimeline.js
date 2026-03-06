@@ -82,7 +82,11 @@ export function createVehicleTimeline(container) {
       .attr('y1', d => y(d.vehicle) + y.bandwidth() / 2)
       .attr('y2', d => y(d.vehicle) + y.bandwidth() / 2)
       .attr('stroke', d => color(d.state))
-      .attr('opacity', 0.6);
+      .attr('opacity', 0.6)
+      .style('cursor', 'pointer')
+      .on('click', (event, d) => {
+        window.location.href = '/vehicle?v=' + encodeURIComponent(d.vehicle);
+      });
 
     // Start dots
     g.selectAll('.timeline-dot-start')
@@ -93,6 +97,10 @@ export function createVehicleTimeline(container) {
       .attr('cy', d => y(d.vehicle) + y.bandwidth() / 2)
       .attr('r', d => rScale(d.count))
       .attr('fill', d => color(d.state))
+      .style('cursor', 'pointer')
+      .on('click', (event, d) => {
+        window.location.href = '/vehicle?v=' + encodeURIComponent(d.vehicle);
+      })
       .on('mousemove', (event, d) => showTip(event, d))
       .on('mouseleave', () => tooltip.hide());
 
@@ -105,6 +113,10 @@ export function createVehicleTimeline(container) {
       .attr('cy', d => y(d.vehicle) + y.bandwidth() / 2)
       .attr('r', d => rScale(d.count))
       .attr('fill', d => color(d.state))
+      .style('cursor', 'pointer')
+      .on('click', (event, d) => {
+        window.location.href = '/vehicle?v=' + encodeURIComponent(d.vehicle);
+      })
       .on('mousemove', (event, d) => showTip(event, d))
       .on('mouseleave', () => tooltip.hide());
 
@@ -120,7 +132,11 @@ export function createVehicleTimeline(container) {
       .select('.domain').remove();
 
     g.selectAll('.axis text')
-      .style('font-size', '0.6rem');
+      .style('font-size', '0.6rem')
+      .style('cursor', 'pointer')
+      .on('click', (event, vehicle) => {
+        window.location.href = '/vehicle?v=' + encodeURIComponent(vehicle);
+      });
 
     // Legend
     const legend = d3.select(body).append('div').attr('class', 'chart-legend');

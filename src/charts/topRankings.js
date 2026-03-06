@@ -16,10 +16,16 @@ const PANELS = [
   { title: 'Top Sites', field: 'Launch_Site', filterKey: 'site', displayNames: SITE_NAMES },
 ];
 
-export function createTopRankings(container) {
-  const section = document.getElementById('chart-top-rankings');
+export function createTopRankings(container, options = {}) {
+  const section = container.querySelector
+    ? container.querySelector('#chart-top-rankings') || document.getElementById('chart-top-rankings')
+    : document.getElementById('chart-top-rankings');
   const controls = section.querySelector('.chart-controls');
   const body = section.querySelector('.chart-body');
+
+  const excludePanels = options.excludePanels || [];
+  const onBarClick = options.onBarClick || null;
+  const activePanels = PANELS.filter(p => !excludePanels.includes(p.filterKey));
 
   let n = 10;
   let currentLaunches = [];
@@ -43,7 +49,7 @@ export function createTopRankings(container) {
     grid.className = 'rankings-grid';
     body.appendChild(grid);
 
-    for (const panel of PANELS) {
+    for (const panel of activePanels) {
       drawPanel(grid, panel);
     }
   }
@@ -92,14 +98,17 @@ export function createTopRankings(container) {
       .attr('fill', d => color(d.label))
       .attr('rx', 3)
       .on('click', (event, d) => {
-        filterState.set({ [panel.filterKey]: d.label });
+        if (onBarClick) onBarClick(panel.filterKey, d.label);
+        else if (panel.filterKey === 'vehicle') window.location.href = '/vehicle?v=' + encodeURIComponent(d.label);
+        else filterState.set({ [panel.filterKey]: d.label });
       })
       .on('mousemove', (event, d) => {
         const name = (panel.displayNames && panel.displayNames[d.label]) || d.label;
+        const hint = onBarClick ? '' : '<div class="tt-row" style="font-size:0.65rem;color:var(--text-muted)">Click to filter</div>';
         tooltip.show(
           `<div class="tt-title">${name}</div>
            <div class="tt-row"><span class="tt-label">Launches</span><span class="tt-value">${fmtNum(d.count)}</span></div>
-           <div class="tt-row" style="font-size:0.65rem;color:var(--text-muted)">Click to filter</div>`,
+           ${hint}`,
           event
         );
       })
@@ -124,9 +133,11 @@ export function createTopRankings(container) {
 
     g.selectAll('.axis text')
       .style('font-size', '0.65rem')
-      .style('cursor', 'pointer')
+      .style('cursor', onBarClick ? 'default' : 'pointer')
       .on('click', (event, label) => {
-        filterState.set({ [panel.filterKey]: label });
+        if (onBarClick) onBarClick(panel.filterKey, label);
+        else if (panel.filterKey === 'vehicle') window.location.href = '/vehicle?v=' + encodeURIComponent(label);
+        else filterState.set({ [panel.filterKey]: label });
       });
   }
 
