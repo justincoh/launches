@@ -16,8 +16,8 @@ Interactive D3.js dashboard visualizing orbital launch data (1957–2026) from a
 ### Data Pipeline
 
 ```
-public/launchlog.tsv
-  → parser.js      (fetch TSV, split into row objects, "-" → null)
+src/data/launchlog.tsv
+  → parser.js      (Vite ?url import gives content-hashed URL; fetch + parse into row objects, "-" → null)
   → normalizer.js  (parse dates, classify outcomes, dedup by Launch_Tag)
   → aggregator.js  (filter + group into chart-ready structures)
 ```

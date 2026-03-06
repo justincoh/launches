@@ -1,3 +1,5 @@
+import tsvUrl from './launchlog.tsv?url';
+
 const HEADERS = [
   'Launch_Tag', 'Launch_Date', 'Piece', 'Type', 'Name', 'PLName',
   'JCAT', 'SatOwner', 'SatState', 'LV_Type', 'Flight_ID', 'Platform',
@@ -5,8 +7,8 @@ const HEADERS = [
   'LVState', 'Launch_Code', 'LTCite'
 ];
 
-export async function fetchAndParse(url = `${import.meta.env.BASE_URL}launchlog.tsv`) {
-  const res = await fetch(`${url}?v=${Date.now()}`);
+export async function fetchAndParse(url = tsvUrl) {
+  const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to load data: ${res.status}`);
   const text = await res.text();
   return parseTSV(text);
