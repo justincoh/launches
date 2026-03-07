@@ -5,3 +5,7 @@ export function vehicleUrl(name) {
 export function agencyUrl(code) {
   return '/agency?a=' + encodeURIComponent(code);
 }
+
+export function siteUrl(code) {
+  return '/site?s=' + encodeURIComponent(code);
+}

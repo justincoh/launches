@@ -61,15 +61,16 @@ Vite is configured as `appType: 'mpa'` with separate HTML entry points. Each det
 |------|------------|-------|-------------|
 | Vehicle | `/vehicle?v=<LV_Type>` | `src/vehicle.js` | `v` |
 | Agency | `/agency?a=<Agency>` | `src/agency.js` | `a` |
+| Site | `/site?s=<Launch_Site>` | `src/site.js` | `s` |
 
 Detail pages reuse the same chart components with options:
 - `createSuccessFailure(container, { donutOnly, excludeDimensions })` — vehicle page uses `donutOnly`, agency page excludes all but `LV_Type`
-- `createTopRankings(container, { excludePanels, onBarClick })` — both pages exclude irrelevant panels
+- `createTopRankings(container, { excludePanels, extraPanels, onBarClick })` — detail pages exclude irrelevant panels; site page adds a "Top Pads" panel via `extraPanels`
 - `createVehicleBarChart(section)` — stacked success/failure bar chart by year, reused on both detail pages
 
 Each detail page has a typeahead search (`vehicleTypeahead.js`, `agencyTypeahead.js`) and a `dualRangeSlider.js` for year filtering.
 
-Clicking vehicle/agency bars on the main page navigates to the respective detail page.
+Clicking vehicle/agency/site bars on the main page navigates to the respective detail page.
 
 ### CSS Structure
 
