@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Country Detail - Space Launch Stats</title>
+  <meta name="description" content="Detailed launch history for a specific country." />
+
+  <!-- umami analytics -->
+  <script defer src="https://cloud.umami.is/script.js" data-website-id="291239a8-32e3-4113-8b40-5925d4dc6220"></script>
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F680;</text></svg>" />
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <a href="/" class="back-link">&larr; All Launches</a>
+      <h1 id="detail-name"></h1>
+      <p class="vehicle-agency" id="detail-extra"></p>
+      <p class="subtitle" id="detail-subtitle"></p>
+      <div id="detail-search"></div>
+    </header>
+
+    <div id="filter-bar" class="filter-bar"></div>
+
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Loading launch data&hellip;</p>
+    </div>
+
+    <div id="not-found" style="display:none;">
+      <p class="not-found-msg">Country not found.</p>
+      <div id="not-found-search"></div>
+    </div>
+
+    <main id="dashboard" class="dashboard" style="display:none;">
+      <section class="chart-section chart-full" id="chart-detail-bar">
+        <div class="chart-header">
+          <h2>Launches by Year</h2>
+          <div class="chart-controls"></div>
+        </div>
+        <div class="chart-body"></div>
+      </section>
+
+      <section class="chart-section chart-half" id="chart-success-failure">
+        <div class="chart-header">
+          <h2>Success vs. Failure</h2>
+          <div class="chart-controls"></div>
+        </div>
+        <div class="chart-body"></div>
+      </section>
+
+      <section class="chart-section chart-half" id="chart-top-rankings">
+        <div class="chart-header">
+          <h2>Top Rankings</h2>
+          <div class="chart-controls"></div>
+        </div>
+        <div class="chart-body"></div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p><a href="/">Back to main dashboard</a></p>
+    </footer>
+  </div>
+
+  <script type="module" src="/src/country.js"></script>
+</body>
+</html>

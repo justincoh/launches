@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 
 // Redirect /vehicle?... to /vehicle/?... so MPA mode finds vehicle/index.html
 function mpaRedirect() {
-  const pages = ['/vehicle', '/agency', '/site'];
+  const pages = ['/vehicle', '/agency', '/site', '/country'];
   return {
     name: 'mpa-redirect',
     configureServer(server) {
@@ -38,6 +38,7 @@ export default defineConfig({
         vehicle: resolve(__dirname, 'vehicle/index.html'),
         agency: resolve(__dirname, 'agency/index.html'),
         site: resolve(__dirname, 'site/index.html'),
+        country: resolve(__dirname, 'country/index.html'),
       },
     },
   },

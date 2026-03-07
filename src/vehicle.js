@@ -1,7 +1,7 @@
 import { initDetailPage } from './detailPage.js';
 import { AGENCY_NAMES } from './data/agencyNames.js';
 import { escapeHtml } from './utils/formatters.js';
-import { vehicleUrl, siteUrl } from './utils/navigation.js';
+import { vehicleUrl, siteUrl, countryUrl } from './utils/navigation.js';
 
 initDetailPage({
   paramKey: 'v',
@@ -28,9 +28,10 @@ initDetailPage({
   },
   sfOptions: { donutOnly: true },
   trOptions: {
-    excludePanels: ['vehicle', 'agency', 'country'],
+    excludePanels: ['vehicle', 'agency'],
     onBarClick: (filterKey, label) => {
       if (filterKey === 'site') window.location.href = siteUrl(label);
+      if (filterKey === 'country') window.location.href = countryUrl(label);
     },
   },
 });

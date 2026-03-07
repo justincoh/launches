@@ -9,3 +9,7 @@ export function agencyUrl(code) {
 export function siteUrl(code) {
   return '/site?s=' + encodeURIComponent(code);
 }
+
+export function countryUrl(code) {
+  return '/country?c=' + encodeURIComponent(code);
+}

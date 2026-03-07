@@ -8,7 +8,7 @@ import { observeResize } from '../utils/responsive.js';
 import { COUNTRY_NAMES } from '../data/countryNames.js';
 import { AGENCY_NAMES } from '../data/agencyNames.js';
 import { SITE_NAMES } from '../data/siteNames.js';
-import { vehicleUrl, agencyUrl, siteUrl } from '../utils/navigation.js';
+import { vehicleUrl, agencyUrl, siteUrl, countryUrl } from '../utils/navigation.js';
 
 const PANELS = [
   { title: 'Top Countries', field: 'LVState', filterKey: 'country', displayNames: COUNTRY_NAMES },
@@ -61,6 +61,7 @@ export function createTopRankings(container, options = {}) {
     else if (panel.filterKey === 'vehicle') window.location.href = vehicleUrl(label);
     else if (panel.filterKey === 'agency') window.location.href = agencyUrl(label);
     else if (panel.filterKey === 'site') window.location.href = siteUrl(label);
+    else if (panel.filterKey === 'country') window.location.href = countryUrl(label);
     else filterState.set({ [panel.filterKey]: label });
   }
 

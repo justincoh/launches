@@ -1,7 +1,7 @@
 import { initDetailPage } from './detailPage.js';
 import { SITE_NAMES } from './data/siteNames.js';
 import { escapeHtml } from './utils/formatters.js';
-import { siteUrl, vehicleUrl, agencyUrl } from './utils/navigation.js';
+import { siteUrl, vehicleUrl, agencyUrl, countryUrl } from './utils/navigation.js';
 
 initDetailPage({
   paramKey: 's',
@@ -24,11 +24,12 @@ initDetailPage({
   },
   sfOptions: { excludeDimensions: ['Launch_Site', 'decade', 'LVState'] },
   trOptions: {
-    excludePanels: ['site', 'country'],
+    excludePanels: ['site'],
     extraPanels: [{ title: 'Top Pads', field: 'Launch_Pad', filterKey: 'pad' }],
     onBarClick: (filterKey, label) => {
       if (filterKey === 'vehicle') window.location.href = vehicleUrl(label);
       if (filterKey === 'agency') window.location.href = agencyUrl(label);
+      if (filterKey === 'country') window.location.href = countryUrl(label);
     },
   },
 });
