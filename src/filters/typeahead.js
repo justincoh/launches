@@ -1,13 +1,13 @@
-import { AGENCY_NAMES } from '../data/agencyNames.js';
+export function createTypeahead(container, items, options = {}) {
+  const { placeholder = 'Search...', match, render, url } = options;
 
-export function createAgencyTypeahead(container, agencies) {
   const wrap = document.createElement('div');
   wrap.className = 'vehicle-search-wrap typeahead-wrap';
 
   const input = document.createElement('input');
   input.type = 'text';
   input.className = 'filter-search-input';
-  input.placeholder = 'Search agencies...';
+  input.placeholder = placeholder;
   wrap.appendChild(input);
 
   const list = document.createElement('div');
@@ -23,19 +23,19 @@ export function createAgencyTypeahead(container, agencies) {
   });
 
   input.addEventListener('keydown', (e) => {
-    const items = list.querySelectorAll('.typeahead-item');
-    if (!items.length) return;
+    const listItems = list.querySelectorAll('.typeahead-item');
+    if (!listItems.length) return;
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      highlightedIdx = Math.min(highlightedIdx + 1, items.length - 1);
-      updateHighlight(items);
+      highlightedIdx = Math.min(highlightedIdx + 1, listItems.length - 1);
+      updateHighlight(listItems);
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       highlightedIdx = Math.max(highlightedIdx - 1, 0);
-      updateHighlight(items);
+      updateHighlight(listItems);
     } else if (e.key === 'Enter' && highlightedIdx >= 0) {
       e.preventDefault();
-      items[highlightedIdx].click();
+      listItems[highlightedIdx].click();
     } else if (e.key === 'Escape') {
       list.innerHTML = '';
       highlightedIdx = -1;
@@ -56,31 +56,25 @@ export function createAgencyTypeahead(container, agencies) {
 
     const q = query.toLowerCase();
     const matches = [];
-    for (let i = 0; i < agencies.length && matches.length < 8; i++) {
-      const code = agencies[i];
-      const name = AGENCY_NAMES[code] || code;
-      if (code.toLowerCase().includes(q) || name.toLowerCase().includes(q)) {
-        matches.push(code);
-      }
+    for (let i = 0; i < items.length && matches.length < 8; i++) {
+      if (match(items[i], q)) matches.push(items[i]);
     }
     if (!matches.length) return;
 
-    for (const code of matches) {
-      const name = AGENCY_NAMES[code] || code;
-      const display = name !== code ? `${code} (${name})` : code;
-      const item = document.createElement('div');
-      item.className = 'typeahead-item';
-      item.textContent = display;
-      item.addEventListener('click', () => {
-        window.location.href = '/agency?a=' + encodeURIComponent(code);
+    for (const item of matches) {
+      const el = document.createElement('div');
+      el.className = 'typeahead-item';
+      el.innerHTML = render(item, query);
+      el.addEventListener('click', () => {
+        window.location.href = url(item);
       });
-      list.appendChild(item);
+      list.appendChild(el);
     }
   }
 
-  function updateHighlight(items) {
-    items.forEach((el, i) => el.classList.toggle('highlighted', i === highlightedIdx));
-    if (items[highlightedIdx]) items[highlightedIdx].scrollIntoView({ block: 'nearest' });
+  function updateHighlight(listItems) {
+    listItems.forEach((el, i) => el.classList.toggle('highlighted', i === highlightedIdx));
+    if (listItems[highlightedIdx]) listItems[highlightedIdx].scrollIntoView({ block: 'nearest' });
   }
 
   return { input };

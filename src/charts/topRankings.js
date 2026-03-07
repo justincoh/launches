@@ -8,6 +8,7 @@ import { observeResize } from '../utils/responsive.js';
 import { COUNTRY_NAMES } from '../data/countryNames.js';
 import { AGENCY_NAMES } from '../data/agencyNames.js';
 import { SITE_NAMES } from '../data/siteNames.js';
+import { vehicleUrl, agencyUrl } from '../utils/navigation.js';
 
 const PANELS = [
   { title: 'Top Countries', field: 'LVState', filterKey: 'country', displayNames: COUNTRY_NAMES },
@@ -54,6 +55,13 @@ export function createTopRankings(container, options = {}) {
     }
   }
 
+  function handleClick(panel, label) {
+    if (onBarClick) onBarClick(panel.filterKey, label);
+    else if (panel.filterKey === 'vehicle') window.location.href = vehicleUrl(label);
+    else if (panel.filterKey === 'agency') window.location.href = agencyUrl(label);
+    else filterState.set({ [panel.filterKey]: label });
+  }
+
   function drawPanel(grid, panel) {
     const wrap = document.createElement('div');
     wrap.className = 'ranking-panel';
@@ -64,6 +72,7 @@ export function createTopRankings(container, options = {}) {
     if (!data.length) return;
 
     const color = categoryColor(data.map(d => d.label));
+    const hint = onBarClick ? '' : '<div class="tt-row" style="font-size:0.65rem;color:var(--text-muted)">Click to filter</div>';
 
     const margin = { top: 2, right: 40, bottom: 5, left: 90 };
     const barH = 20;
@@ -97,15 +106,9 @@ export function createTopRankings(container, options = {}) {
       .attr('height', y.bandwidth())
       .attr('fill', d => color(d.label))
       .attr('rx', 3)
-      .on('click', (event, d) => {
-        if (onBarClick) onBarClick(panel.filterKey, d.label);
-        else if (panel.filterKey === 'vehicle') window.location.href = '/vehicle?v=' + encodeURIComponent(d.label);
-        else if (panel.filterKey === 'agency') window.location.href = '/agency?a=' + encodeURIComponent(d.label);
-        else filterState.set({ [panel.filterKey]: d.label });
-      })
+      .on('click', (event, d) => handleClick(panel, d.label))
       .on('mousemove', (event, d) => {
         const name = (panel.displayNames && panel.displayNames[d.label]) || d.label;
-        const hint = onBarClick ? '' : '<div class="tt-row" style="font-size:0.65rem;color:var(--text-muted)">Click to filter</div>';
         tooltip.show(
           `<div class="tt-title">${name}</div>
            <div class="tt-row"><span class="tt-label">Launches</span><span class="tt-value">${fmtNum(d.count)}</span></div>
@@ -135,12 +138,7 @@ export function createTopRankings(container, options = {}) {
     g.selectAll('.axis text')
       .style('font-size', '0.65rem')
       .style('cursor', onBarClick ? 'default' : 'pointer')
-      .on('click', (event, label) => {
-        if (onBarClick) onBarClick(panel.filterKey, label);
-        else if (panel.filterKey === 'vehicle') window.location.href = '/vehicle?v=' + encodeURIComponent(label);
-        else if (panel.filterKey === 'agency') window.location.href = '/agency?a=' + encodeURIComponent(label);
-        else filterState.set({ [panel.filterKey]: label });
-      });
+      .on('click', (event, label) => handleClick(panel, label));
   }
 
   observeResize(body, () => draw());

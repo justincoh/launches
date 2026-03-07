@@ -6,6 +6,7 @@ import { fmtNum } from '../utils/formatters.js';
 import { COUNTRY_NAMES } from '../data/countryNames.js';
 import { AGENCY_NAMES } from '../data/agencyNames.js';
 import { observeResize } from '../utils/responsive.js';
+import { vehicleUrl } from '../utils/navigation.js';
 
 export function createLaunchesOverTime(container) {
   const section = document.getElementById('chart-launches-over-time');
@@ -230,7 +231,7 @@ export function createLaunchesOverTime(container) {
       if (stackField === 'LV_Type' && key !== 'Other') {
         item.style('cursor', 'pointer')
           .on('click', () => {
-            window.location.href = '/vehicle?v=' + encodeURIComponent(key);
+            window.location.href = vehicleUrl(key);
           });
       }
     }

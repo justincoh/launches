@@ -3,20 +3,18 @@ import { defineConfig } from 'vite';
 
 // Redirect /vehicle?... to /vehicle/?... so MPA mode finds vehicle/index.html
 function mpaRedirect() {
+  const pages = ['/vehicle', '/agency'];
   return {
     name: 'mpa-redirect',
     configureServer(server) {
       server.middlewares.use((req, res, next) => {
         const url = new URL(req.url, 'http://localhost');
-        if (url.pathname === '/vehicle') {
-          res.writeHead(301, { Location: '/vehicle/' + url.search });
-          res.end();
-          return;
-        }
-        if (url.pathname === '/agency') {
-          res.writeHead(301, { Location: '/agency/' + url.search });
-          res.end();
-          return;
+        for (const page of pages) {
+          if (url.pathname === page) {
+            res.writeHead(301, { Location: page + '/' + url.search });
+            res.end();
+            return;
+          }
         }
         next();
       });

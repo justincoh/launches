@@ -5,6 +5,7 @@ import { categoryColor } from '../utils/colorScale.js';
 import { fmtNum } from '../utils/formatters.js';
 import { observeResize } from '../utils/responsive.js';
 import { COUNTRY_NAMES } from '../data/countryNames.js';
+import { vehicleUrl } from '../utils/navigation.js';
 
 export function createVehicleTimeline(container) {
   const section = document.getElementById('chart-vehicle-timeline');
@@ -72,6 +73,10 @@ export function createVehicleTimeline(container) {
       .call(d3.axisBottom(x).tickSize(-(data.length * (rowH + 2))).tickFormat(''))
       .select('.domain').remove();
 
+    function navigateToVehicle(event, d) {
+      window.location.href = vehicleUrl(typeof d === 'string' ? d : d.vehicle);
+    }
+
     // Lines
     g.selectAll('.timeline-line')
       .data(data)
@@ -84,9 +89,7 @@ export function createVehicleTimeline(container) {
       .attr('stroke', d => color(d.state))
       .attr('opacity', 0.6)
       .style('cursor', 'pointer')
-      .on('click', (event, d) => {
-        window.location.href = '/vehicle?v=' + encodeURIComponent(d.vehicle);
-      });
+      .on('click', navigateToVehicle);
 
     // Start dots
     g.selectAll('.timeline-dot-start')
@@ -98,9 +101,7 @@ export function createVehicleTimeline(container) {
       .attr('r', d => rScale(d.count))
       .attr('fill', d => color(d.state))
       .style('cursor', 'pointer')
-      .on('click', (event, d) => {
-        window.location.href = '/vehicle?v=' + encodeURIComponent(d.vehicle);
-      })
+      .on('click', navigateToVehicle)
       .on('mousemove', (event, d) => showTip(event, d))
       .on('mouseleave', () => tooltip.hide());
 
@@ -114,9 +115,7 @@ export function createVehicleTimeline(container) {
       .attr('r', d => rScale(d.count))
       .attr('fill', d => color(d.state))
       .style('cursor', 'pointer')
-      .on('click', (event, d) => {
-        window.location.href = '/vehicle?v=' + encodeURIComponent(d.vehicle);
-      })
+      .on('click', navigateToVehicle)
       .on('mousemove', (event, d) => showTip(event, d))
       .on('mouseleave', () => tooltip.hide());
 
@@ -134,9 +133,7 @@ export function createVehicleTimeline(container) {
     g.selectAll('.axis text')
       .style('font-size', '0.6rem')
       .style('cursor', 'pointer')
-      .on('click', (event, vehicle) => {
-        window.location.href = '/vehicle?v=' + encodeURIComponent(vehicle);
-      });
+      .on('click', navigateToVehicle);
 
     // Legend
     const legend = d3.select(body).append('div').attr('class', 'chart-legend');

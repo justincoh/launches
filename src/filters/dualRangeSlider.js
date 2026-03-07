@@ -1,6 +1,7 @@
 export function createDualRangeSlider(absMin, absMax, initMin, initMax, onChange) {
   let curMin = initMin;
   let curMax = initMax;
+  let rafId = null;
 
   const el = document.createElement('div');
   el.className = 'dual-range';
@@ -67,7 +68,11 @@ export function createDualRangeSlider(absMin, absMax, initMin, initMax, onChange
         curMax = val;
       }
       updatePositions();
-      onChange(curMin, curMax);
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        onChange(curMin, curMax);
+        rafId = null;
+      });
     };
 
     const onUp = () => {

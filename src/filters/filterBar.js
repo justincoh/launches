@@ -5,6 +5,7 @@ import { uniqueValues } from '../data/aggregator.js';
 import { SITE_NAMES } from '../data/siteNames.js';
 import { AGENCY_NAMES } from '../data/agencyNames.js';
 import { COUNTRY_NAMES } from '../data/countryNames.js';
+import { escapeHtml } from '../utils/formatters.js';
 
 let dropdowns = {};
 
@@ -250,6 +251,3 @@ function updateTypeaheadHighlight(items, idx) {
   if (items[idx]) items[idx].scrollIntoView({ block: 'nearest' });
 }
 
-function escapeHtml(str) {
-  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
