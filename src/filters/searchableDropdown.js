@@ -51,7 +51,7 @@ export function createSearchableDropdown(container, { label, options, value, onC
     // "All" option
     const allOpt = document.createElement('div');
     allOpt.className = 'dropdown-option' + (!value ? ' selected' : '');
-    allOpt.textContent = `All ${label}`;
+    allOpt.textContent = 'All';
     allOpt.addEventListener('click', () => {
       select(null);
     });
