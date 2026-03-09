@@ -73,6 +73,16 @@ Each detail page has a typeahead search (`vehicleTypeahead.js`, `agencyTypeahead
 
 Clicking vehicle/agency/site/country bars on the main page navigates to the respective detail page.
 
+### Shareable URL State
+
+Filter state is encoded in URL query params so views can be shared.
+
+**Main dashboard** (`src/filters/urlSync.js`): `parseUrlFilters()` reads params on load, `startUrlSync()` subscribes to filterState and writes params via `history.replaceState()`. Param mapping: `country`, `agency`, `vehicle`, `site`, `pad` (direct), `q` → `payloadSearch`, `from` → `yearMin`, `to` → `yearMax`. Default values are omitted for clean URLs.
+
+**Detail pages** (`src/detailPage.js`): Read `from`/`to` params to set initial year range on the slider. Slider changes sync back to the URL.
+
+`dualRangeSlider.js` exposes `setValues(min, max)` for programmatic updates without triggering `onChange`.
+
 ### CSS Structure
 
 Three CSS files imported in `main.js`: `main.css` (layout, variables, grid), `filters.css` (filter bar, dropdowns, dual-range slider, mobile overlay), `charts.css` (tooltips, legends, axes, chart-specific styles). Dark theme with CSS custom properties.
