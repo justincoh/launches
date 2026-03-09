@@ -101,6 +101,11 @@ export function createDualRangeSlider(absMin, absMax, initMin, initMax, onChange
       curMin = initMin;
       curMax = initMax;
       updatePositions();
+    },
+    setValues(min, max) {
+      curMin = Math.max(absMin, Math.min(absMax, min));
+      curMax = Math.max(absMin, Math.min(absMax, max));
+      updatePositions();
     }
   };
 }
