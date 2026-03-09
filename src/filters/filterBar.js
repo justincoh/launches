@@ -207,6 +207,16 @@ export function initFilterBar(container, launches) {
         mdd.dd.update(options, state[cfg.key]);
       }
     }
+    // Sync search inputs from state (for URL-driven updates)
+    if (searchInput.value !== state.payloadSearch) {
+      searchInput.value = state.payloadSearch || '';
+    }
+    if (mobileSearchInput.value !== state.payloadSearch) {
+      mobileSearchInput.value = state.payloadSearch || '';
+    }
+    // Sync range sliders from state
+    rangeSlider.setValues(state.yearMin, state.yearMax);
+    mobileRangeSlider.setValues(state.yearMin, state.yearMax);
   });
 }
 

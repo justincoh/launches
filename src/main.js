@@ -5,6 +5,8 @@ import './styles/charts.css';
 import { fetchAndParse } from './data/parser.js';
 import { normalize } from './data/normalizer.js';
 import { initFilterBar } from './filters/filterBar.js';
+import { filterState } from './filters/filterState.js';
+import { parseUrlFilters, startUrlSync } from './filters/urlSync.js';
 import { chartManager } from './charts/chartManager.js';
 import { createLaunchesOverTime } from './charts/launchesOverTime.js';
 import { createSuccessFailure } from './charts/successFailure.js';
@@ -38,6 +40,11 @@ async function init() {
 
     // Init filter bar
     initFilterBar(filterBarEl, launches);
+
+    // Apply URL filters and start syncing
+    const urlFilters = parseUrlFilters();
+    if (urlFilters) filterState.set(urlFilters);
+    startUrlSync();
 
     // Init chart manager
     chartManager.init(launches, payloads);
