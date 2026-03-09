@@ -19,6 +19,8 @@ export async function initDetailPage(config) {
 
   const params = new URLSearchParams(window.location.search);
   const paramValue = params.get(paramKey);
+  const urlFrom = params.get('from') ? parseInt(params.get('from'), 10) : null;
+  const urlTo = params.get('to') ? parseInt(params.get('to'), 10) : null;
 
   const loadingEl = document.getElementById('loading');
   const dashboardEl = document.getElementById('dashboard');
@@ -84,13 +86,20 @@ export async function initDetailPage(config) {
     const minYear = Math.min(...years);
     const maxYear = Math.max(...years);
 
-    let yearMin = minYear;
-    let yearMax = maxYear;
+    let yearMin = (urlFrom && !isNaN(urlFrom) && urlFrom >= minYear) ? urlFrom : minYear;
+    let yearMax = (urlTo && !isNaN(urlTo) && urlTo <= maxYear) ? urlTo : maxYear;
 
-    const rangeSlider = createDualRangeSlider(minYear, maxYear, minYear, maxYear, (min, max) => {
+    const rangeSlider = createDualRangeSlider(minYear, maxYear, yearMin, yearMax, (min, max) => {
       yearMin = min;
       yearMax = max;
       updateCharts();
+      // Sync URL with current slider state
+      const newParams = new URLSearchParams(window.location.search);
+      if (min !== minYear) newParams.set('from', min); else newParams.delete('from');
+      if (max !== maxYear) newParams.set('to', max); else newParams.delete('to');
+      const qs = newParams.toString();
+      const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+      history.replaceState(null, '', url);
     });
     filterBarEl.appendChild(rangeSlider.el);
 
