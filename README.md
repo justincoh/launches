@@ -4,9 +4,10 @@ Interactive dashboard visualizing every orbital launch attempt from 1957 to toda
 
 Filterable by year, country, agency, vehicle, launch site, and payload.
 
-<img width="1392" height="582" alt="image" src="https://github.com/user-attachments/assets/1c4dcc9c-347b-4036-b487-d89cbcdb508f" />
+<img width="1392" height="587" alt="image" src="https://github.com/user-attachments/assets/95e95bf3-5e81-4962-a056-f21f6e8862bf" />
 
-<img width="699" height="381" alt="image" src="https://github.com/user-attachments/assets/d965c55f-bb8a-4ada-b5bb-51534cfb5259" />
+<img width="697" height="609" alt="image" src="https://github.com/user-attachments/assets/63b473c7-8ee6-4c4a-aeb9-36dd17a3c398" />
 
-<img width="696" height="376" alt="image" src="https://github.com/user-attachments/assets/f9e1e0bb-b09f-4e5c-b03c-cf811431d8a2" />
+<img width="693" height="348" alt="image" src="https://github.com/user-attachments/assets/5c1cea2f-2274-4c76-803d-72142e39d960" />
+
 
