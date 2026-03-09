@@ -79,9 +79,10 @@ export function createLaunchesOverTime(container) {
     const data = launchesByYear(launches, payloads, 'launches');
     if (!data.length) return;
 
-    const x = d3.scaleLinear()
-      .domain(d3.extent(data, d => d.year))
-      .range([0, innerW]);
+    const x = d3.scaleBand()
+      .domain(data.map(d => d.year))
+      .range([0, innerW])
+      .padding(0.15);
 
     const y = d3.scaleLinear()
       .domain([0, d3.max(data, d => d.count) * 1.1])
@@ -92,34 +93,29 @@ export function createLaunchesOverTime(container) {
     g.append('g').attr('class', 'grid')
       .call(d3.axisLeft(y).tickSize(-innerW).tickFormat(''));
 
-    // Area
-    const area = d3.area()
-      .x(d => x(d.year))
-      .y0(innerH)
-      .y1(d => y(d.count))
-      .curve(d3.curveMonotoneX);
-
-    g.append('path')
-      .datum(data)
-      .attr('fill', 'rgba(99, 102, 241, 0.2)')
-      .attr('d', area);
-
-    // Line
-    const line = d3.line()
-      .x(d => x(d.year))
-      .y(d => y(d.count))
-      .curve(d3.curveMonotoneX);
-
-    g.append('path')
-      .datum(data)
-      .attr('fill', 'none')
-      .attr('stroke', '#6366f1')
-      .attr('stroke-width', 2)
-      .attr('d', line);
+    // Bars
+    g.selectAll('.bar')
+      .data(data)
+      .join('rect')
+      .attr('class', 'bar')
+      .attr('x', d => x(d.year))
+      .attr('y', d => y(d.count))
+      .attr('width', x.bandwidth())
+      .attr('height', d => innerH - y(d.count))
+      .attr('fill', '#6366f1')
+      .attr('opacity', 0.85)
+      .on('mousemove', (event, d) => {
+        tooltip.show(
+          `<div class="tt-title">${d.year}</div>
+           <div class="tt-row"><span class="tt-label">Launches</span><span class="tt-value">${fmtNum(d.count)}</span></div>`,
+          event
+        );
+      })
+      .on('mouseleave', () => tooltip.hide());
 
     // Axes
-    const xAxis = d3.axisBottom(x).tickFormat(d3.format('d'));
-    if (isMobile()) xAxis.ticks(5);
+    const tickYears = data.map(d => d.year).filter(yr => yr % 5 === 0);
+    const xAxis = d3.axisBottom(x).tickValues(tickYears).tickFormat(d3.format('d'));
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
@@ -128,50 +124,6 @@ export function createLaunchesOverTime(container) {
     g.append('g')
       .attr('class', 'axis')
       .call(d3.axisLeft(y));
-
-    // Hover interaction
-    const hoverLine = g.append('line')
-      .attr('class', 'hover-line')
-      .attr('y1', 0)
-      .attr('y2', innerH)
-      .style('display', 'none');
-
-    const hoverDot = g.append('circle')
-      .attr('r', 4)
-      .attr('fill', '#6366f1')
-      .style('display', 'none');
-
-    const overlay = g.append('rect')
-      .attr('width', innerW)
-      .attr('height', innerH)
-      .attr('fill', 'none')
-      .attr('pointer-events', 'all');
-
-    const bisect = d3.bisector(d => d.year).left;
-
-    overlay.on('mousemove', function(event) {
-      const [mx] = d3.pointer(event);
-      const yr = x.invert(mx);
-      const idx = bisect(data, yr, 1);
-      const d0 = data[idx - 1];
-      const d1 = data[idx];
-      const d = d1 && (yr - d0.year > d1.year - yr) ? d1 : d0;
-      if (!d) return;
-
-      hoverLine.attr('x1', x(d.year)).attr('x2', x(d.year)).style('display', null);
-      hoverDot.attr('cx', x(d.year)).attr('cy', y(d.count)).style('display', null);
-      tooltip.show(
-        `<div class="tt-title">${d.year}</div>
-         <div class="tt-row"><span class="tt-label">Launches</span><span class="tt-value">${fmtNum(d.count)}</span></div>`,
-        event
-      );
-    });
-
-    overlay.on('mouseleave', () => {
-      hoverLine.style('display', 'none');
-      hoverDot.style('display', 'none');
-      tooltip.hide();
-    });
   }
 
   function drawStacked(g, launches, innerW, innerH, svg, w, h) {
@@ -180,9 +132,10 @@ export function createLaunchesOverTime(container) {
 
     const color = categoryColor(keys);
 
-    const x = d3.scaleLinear()
-      .domain(d3.extent(data, d => d.year))
-      .range([0, innerW]);
+    const x = d3.scaleBand()
+      .domain(data.map(d => d.year))
+      .range([0, innerW])
+      .padding(0.15);
 
     const stack = d3.stack().keys(keys);
     const series = stack(data);
@@ -195,22 +148,44 @@ export function createLaunchesOverTime(container) {
     g.append('g').attr('class', 'grid')
       .call(d3.axisLeft(y).tickSize(-innerW).tickFormat(''));
 
-    const area = d3.area()
-      .x(d => x(d.data.year))
-      .y0(d => y(d[0]))
-      .y1(d => y(d[1]))
-      .curve(d3.curveMonotoneX);
-
-    g.selectAll('.stack-area')
+    // Stacked bars
+    g.selectAll('.stack-group')
       .data(series)
-      .join('path')
-      .attr('class', 'stack-area')
+      .join('g')
+      .attr('class', 'stack-group')
       .attr('fill', d => color(d.key))
-      .attr('opacity', 0.75)
-      .attr('d', area);
+      .selectAll('rect')
+      .data(d => d.map(pt => ({ ...pt, key: d.key })))
+      .join('rect')
+      .attr('x', d => x(d.data.year))
+      .attr('y', d => y(d[1]))
+      .attr('height', d => y(d[0]) - y(d[1]))
+      .attr('width', x.bandwidth())
+      .attr('opacity', 0.85);
 
-    const xAxis = d3.axisBottom(x).tickFormat(d3.format('d'));
-    if (isMobile()) xAxis.ticks(5);
+    const nameMap = stackField === 'Agency' ? AGENCY_NAMES : stackField === 'LVState' ? COUNTRY_NAMES : {};
+
+    // Invisible overlay rects per year for tooltips
+    g.selectAll('.hover-bar')
+      .data(data)
+      .join('rect')
+      .attr('class', 'hover-bar')
+      .attr('x', d => x(d.year))
+      .attr('y', 0)
+      .attr('width', x.bandwidth())
+      .attr('height', innerH)
+      .attr('fill', 'none')
+      .attr('pointer-events', 'all')
+      .on('mousemove', (event, d) => {
+        const rows = keys.filter(k => d[k] > 0).map(k =>
+          `<div class="tt-row"><span class="tt-label"><span class="tt-swatch" style="background:${color(k)}"></span>${nameMap[k] || k}</span><span class="tt-value">${d[k]}</span></div>`
+        ).join('');
+        tooltip.show(`<div class="tt-title">${d.year}</div>${rows}`, event);
+      })
+      .on('mouseleave', () => tooltip.hide());
+
+    const tickYears = data.map(d => d.year).filter(yr => yr % 5 === 0);
+    const xAxis = d3.axisBottom(x).tickValues(tickYears).tickFormat(d3.format('d'));
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
@@ -221,7 +196,6 @@ export function createLaunchesOverTime(container) {
       .call(d3.axisLeft(y));
 
     // Legend
-    const nameMap = stackField === 'Agency' ? AGENCY_NAMES : stackField === 'LVState' ? COUNTRY_NAMES : {};
     const legend = d3.select(body).append('div').attr('class', 'chart-legend');
     for (const key of keys) {
       const displayName = nameMap[key] || key;
@@ -235,39 +209,6 @@ export function createLaunchesOverTime(container) {
           });
       }
     }
-
-    // Hover
-    const overlay = g.append('rect')
-      .attr('width', innerW).attr('height', innerH)
-      .attr('fill', 'none').attr('pointer-events', 'all');
-
-    const hoverLine = g.append('line')
-      .attr('class', 'hover-line')
-      .attr('y1', 0).attr('y2', innerH)
-      .style('display', 'none');
-
-    const bisect = d3.bisector(d => d.year).left;
-
-    overlay.on('mousemove', function(event) {
-      const [mx] = d3.pointer(event);
-      const yr = x.invert(mx);
-      const idx = bisect(data, yr, 1);
-      const d0 = data[idx - 1];
-      const d1 = data[idx];
-      const d = d1 && (yr - d0.year > d1.year - yr) ? d1 : d0;
-      if (!d) return;
-
-      hoverLine.attr('x1', x(d.year)).attr('x2', x(d.year)).style('display', null);
-      const rows = keys.map(k =>
-        `<div class="tt-row"><span class="tt-label"><span class="tt-swatch" style="background:${color(k)}"></span>${nameMap[k] || k}</span><span class="tt-value">${d[k]}</span></div>`
-      ).join('');
-      tooltip.show(`<div class="tt-title">${d.year}</div>${rows}`, event);
-    });
-
-    overlay.on('mouseleave', () => {
-      hoverLine.style('display', 'none');
-      tooltip.hide();
-    });
   }
 
   observeResize(body, () => draw());
