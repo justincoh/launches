@@ -89,32 +89,53 @@ export async function initDetailPage(config) {
     let yearMin = (urlFrom && !isNaN(urlFrom) && urlFrom >= minYear) ? urlFrom : minYear;
     let yearMax = (urlTo && !isNaN(urlTo) && urlTo <= maxYear) ? urlTo : maxYear;
 
+    function syncUrl() {
+      const newParams = new URLSearchParams(window.location.search);
+      if (yearMin !== minYear) newParams.set('from', yearMin); else newParams.delete('from');
+      if (yearMax !== maxYear) newParams.set('to', yearMax); else newParams.delete('to');
+      const qs = newParams.toString();
+      const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+      history.replaceState(null, '', url);
+    }
+
     const rangeSlider = createDualRangeSlider(minYear, maxYear, yearMin, yearMax, (min, max) => {
       yearMin = min;
       yearMax = max;
       updateCharts();
-      // Sync URL with current slider state
-      const newParams = new URLSearchParams(window.location.search);
-      if (min !== minYear) newParams.set('from', min); else newParams.delete('from');
-      if (max !== maxYear) newParams.set('to', max); else newParams.delete('to');
-      const qs = newParams.toString();
-      const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
-      history.replaceState(null, '', url);
+      syncUrl();
     });
     filterBarEl.appendChild(rangeSlider.el);
 
     // Create charts
-    const barChart = createVehicleBarChart(document.getElementById('chart-detail-bar'));
+    let prevYearMin = null;
+    let prevYearMax = null;
+
+    const barChart = createVehicleBarChart(document.getElementById('chart-detail-bar'), {
+      onDrillYear(year) {
+        if (year !== null) {
+          prevYearMin = yearMin;
+          prevYearMax = yearMax;
+          yearMin = year;
+          yearMax = year;
+        } else {
+          yearMin = prevYearMin ?? minYear;
+          yearMax = prevYearMax ?? maxYear;
+          prevYearMin = null;
+          prevYearMax = null;
+        }
+        rangeSlider.setValues(yearMin, yearMax);
+        updateCharts();
+        syncUrl();
+      }
+    });
     const sfChart = createSuccessFailure(document, sfOptions);
     const trChart = createTopRankings(document, trOptions);
 
-    const charts = [barChart, sfChart, trChart];
-
     function updateCharts() {
       const yearFiltered = filtered.filter(d => d.year >= yearMin && d.year <= yearMax);
-      for (const chart of charts) {
-        chart.update(yearFiltered);
-      }
+      barChart.update(yearFiltered, { yearMin, yearMax });
+      sfChart.update(yearFiltered);
+      trChart.update(yearFiltered);
     }
 
     // Show dashboard

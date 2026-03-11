@@ -165,6 +165,54 @@ export function vehicleLifespans(launches, topCount = 30) {
     .slice(0, topCount);
 }
 
+export const MONTH_LABELS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+export function launchesByMonth(launches, year) {
+  const counts = new Array(12).fill(0);
+  for (const d of launches) {
+    if (d.year === year && d.date != null) {
+      counts[d.date.getMonth()]++;
+    }
+  }
+  return counts.map((count, month) => ({ month, count }));
+}
+
+export function launchesByMonthStacked(launches, year, field, topN = 5) {
+  const filtered = launches.filter(d => d.year === year && d.date != null);
+
+  // Count by field value
+  const totals = new Map();
+  for (const d of filtered) {
+    const key = d[field] || 'Unknown';
+    totals.set(key, (totals.get(key) || 0) + 1);
+  }
+  const topKeys = [...totals.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, topN)
+    .map(d => d[0]);
+  const topSet = new Set(topKeys);
+
+  // Group by month and key
+  const monthMap = new Map();
+  for (let m = 0; m < 12; m++) monthMap.set(m, {});
+  for (const d of filtered) {
+    const m = d.date.getMonth();
+    const bucket = monthMap.get(m);
+    const key = topSet.has(d[field]) ? d[field] : 'Other';
+    bucket[key] = (bucket[key] || 0) + 1;
+  }
+
+  const hasOther = [...monthMap.values()].some(bucket => bucket['Other'] > 0);
+  const keys = hasOther ? [...topKeys, 'Other'] : [...topKeys];
+  const data = [];
+  for (const [month, bucket] of monthMap) {
+    const row = { month };
+    for (const k of keys) row[k] = bucket[k] || 0;
+    data.push(row);
+  }
+  return { data: data.sort((a, b) => a.month - b.month), keys };
+}
+
 export function uniqueValues(data, field) {
   const map = new Map();
   for (const d of data) {
