@@ -67,11 +67,19 @@ Vite is configured as `appType: 'mpa'` with separate HTML entry points. Each det
 Detail pages reuse the same chart components with options:
 - `createSuccessFailure(container, { donutOnly, excludeDimensions })` — vehicle page uses `donutOnly`, agency page excludes all but `LV_Type`
 - `createTopRankings(container, { excludePanels, extraPanels, onBarClick })` — detail pages exclude irrelevant panels; site page adds a "Top Pads" panel via `extraPanels`
-- `createVehicleBarChart(section)` — stacked success/failure bar chart by year, reused on both detail pages
+- `createVehicleBarChart(section, { onDrillYear })` — stacked success/failure bar chart by year with monthly drill-down, reused on detail pages
 
 Each detail page has a typeahead search (`vehicleTypeahead.js`, `agencyTypeahead.js`) and a `dualRangeSlider.js` for year filtering.
 
 Clicking vehicle/agency/site/country bars on the main page navigates to the respective detail page.
+
+### Monthly Drill-Down
+
+Both `launchesOverTime.js` (main dashboard) and `vehicleBarChart.js` (detail pages) support clicking a year bar to drill into monthly bars for that year. Drilling updates ALL page filters (not just the chart):
+
+- **Main dashboard**: `drillInto(year)` saves the previous year range, then calls `filterState.set({ yearMin: year, yearMax: year })`. All charts receive data filtered to that single year. The timeline chart renders monthly bars via `launchesByMonth`/`launchesByMonthStacked` from `aggregator.js`. Back button restores the previous range via `filterState.set()`.
+- **Detail pages**: `createVehicleBarChart` accepts an `onDrillYear(year|null)` callback. `detailPage.js` wires this to save/restore yearMin/yearMax, update the slider via `setValues()`, and call `updateCharts()` so all detail page charts reflect the drilled year.
+- **Auto-exit**: If the user manually changes the year range (slider drag, Clear All) while drilled in, drill mode exits automatically — the chart's `update()` detects the year range no longer matches `drillYear`.
 
 ### Shareable URL State
 
