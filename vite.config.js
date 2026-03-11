@@ -23,6 +23,10 @@ function mpaRedirect() {
 }
 
 export default defineConfig({
+  test: {
+    environment: 'node',
+    include: ['src/**/*.test.js'],
+  },
   root: '.',
   publicDir: 'public',
   appType: 'mpa',

@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Dev server:** `npm run dev` (Vite, port 5174)
 - **Build:** `npm run build` (outputs to `dist/`)
 - **Preview production build:** `npm run preview`
-- No test framework is configured.
+- **Tests:** `npm test` (Vitest, runs all `src/**/*.test.js`; 115 tests, ~160ms)
 
 ## Architecture
 
