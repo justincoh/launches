@@ -7,14 +7,10 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 jobs:
   update:
     runs-on: ubuntu-latest
-    outputs:
-      changed: ${{ steps.commit.outputs.changed }}
     steps:
       - uses: actions/checkout@v4
 
@@ -22,17 +18,10 @@ jobs:
         run: curl -fSL -o src/data/launchlog.tsv https://planet4589.org/space/gcat/tsv/derived/launchlog.tsv
 
       - name: Commit and push if changed
-        id: commit
         run: |
-          git diff --quiet src/data/launchlog.tsv && echo "changed=false" >> "$GITHUB_OUTPUT" && exit 0
+          git diff --quiet src/data/launchlog.tsv && exit 0
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add src/data/launchlog.tsv
           git commit -m "Update launch data $(date -u +%Y-%m-%d)"
           git push
-          echo "changed=true" >> "$GITHUB_OUTPUT"
-
-  deploy:
-    needs: update
-    if: needs.update.outputs.changed == 'true'
-    uses: ./.github/workflows/deploy.yml
