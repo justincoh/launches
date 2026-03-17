@@ -7,7 +7,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Dev server:** `npm run dev` (Vite, port 5174)
 - **Build:** `npm run build` (outputs to `dist/`)
 - **Preview production build:** `npm run preview`
-- **Tests:** `npm test` (Vitest, runs all `src/**/*.test.js`; 115 tests, ~160ms)
+- **Tests:** `npm test` (Vitest, runs all `src/**/*.test.js`)
+- **Before committing:** always run `npm test` and confirm all tests pass first
 
 ## Architecture
 
@@ -23,24 +24,6 @@ src/data/launchlog.tsv
 ```
 
 The normalizer produces two arrays: **launches** (~7,200 unique by Launch_Tag) and **payloads** (~28,750 rows). Charts work with launch-level data; payload search filters by matching Name/PLName then maps back to Launch_Tags.
-
-### Filter → Chart Update Cycle
-
-`filterState.js` is a pub/sub store. When any filter changes:
-
-1. `filterState.set({key: value})` updates state and notifies subscribers
-2. `chartManager` (the main subscriber) calls `filterData()` from aggregator
-3. `chartManager` calls `update(launches, payloads, filters)` on all registered charts inside `requestAnimationFrame`
-
-All charts implement a `{ update(launches, payloads, filters) }` interface returned from their `create*()` factory function. Charts are registered in `main.js`.
-
-### Display Name Mappings
-
-Three mapping files (`countryNames.js`, `agencyNames.js`, `siteNames.js`) map abbreviation codes to full names. These are used in:
-- Filter dropdowns: shown as `CODE (Full Name)`, also searched by full name
-- Chart legends and tooltips
-
-The pattern: pass a `displayNames` object through config, then look up with `displayNames[code] || code`.
 
 ### Key Data Fields
 
@@ -64,13 +47,6 @@ Vite is configured as `appType: 'mpa'` with separate HTML entry points. Each det
 | Site | `/site?s=<Launch_Site>` | `src/site.js` | `s` |
 | Country | `/country?c=<LVState>` | `src/country.js` | `c` |
 
-Detail pages reuse the same chart components with options:
-- `createSuccessFailure(container, { donutOnly, excludeDimensions })` — vehicle page uses `donutOnly`, agency page excludes all but `LV_Type`
-- `createTopRankings(container, { excludePanels, extraPanels, onBarClick })` — detail pages exclude irrelevant panels; site page adds a "Top Pads" panel via `extraPanels`
-- `createVehicleBarChart(section, { onDrillYear })` — stacked success/failure bar chart by year with monthly drill-down, reused on detail pages
-
-Each detail page has a typeahead search (`vehicleTypeahead.js`, `agencyTypeahead.js`) and a `dualRangeSlider.js` for year filtering.
-
 Clicking vehicle/agency/site/country bars on the main page navigates to the respective detail page.
 
 ### Monthly Drill-Down
@@ -90,17 +66,3 @@ Filter state is encoded in URL query params so views can be shared.
 **Detail pages** (`src/detailPage.js`): Read `from`/`to` params to set initial year range on the slider. Slider changes sync back to the URL.
 
 `dualRangeSlider.js` exposes `setValues(min, max)` for programmatic updates without triggering `onChange`.
-
-### CSS Structure
-
-Three CSS files imported in `main.js`: `main.css` (layout, variables, grid), `filters.css` (filter bar, dropdowns, dual-range slider, mobile overlay), `charts.css` (tooltips, legends, axes, chart-specific styles). Dark theme with CSS custom properties.
-
-Mobile breakpoint at 768px: charts go single-column, filter bar collapses to overlay.
-
-### Deployment
-
-Hosted on GitHub Pages at `launchstats.info`.
-
-- **`deploy.yml`** — Builds and deploys to Pages on every push to `main`. Also callable via `workflow_call` so other workflows can reuse it.
-- **`update-data.yml`** — Daily cron (8:00 UTC) fetches the latest TSV from `planet4589.org`, commits if changed, then calls `deploy.yml` to redeploy.
-- **Custom domain** — `public/CNAME` sets `launchstats.info`. Base path is `/` (no subdirectory).
