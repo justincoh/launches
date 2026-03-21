@@ -337,6 +337,11 @@
     display: block;
   }
 
+  .filter-overlay .filter-trigger {
+    width: 100%;
+    justify-content: center;
+  }
+
   .dropdown-panel {
     position: static;
     width: 100%;
