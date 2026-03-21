@@ -1,68 +1,29 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 ## Commands
 
-- **Dev server:** `npm run dev` (Vite, port 5174)
-- **Build:** `npm run build` (outputs to `dist/`)
-- **Preview production build:** `npm run preview`
-- **Tests:** `npm test` (Vitest, runs all `src/**/*.test.js`)
 - **Before committing:** always run `npm test` and confirm all tests pass first
 
 ## Architecture
 
 Interactive D3.js dashboard visualizing orbital launch data (1957–2026) from a TSV file. Vanilla JS with Vite, no framework.
 
-### Data Pipeline
+### Key Data Fields
 
-```
-src/data/launchlog.tsv
-  → parser.js      (Vite ?url import gives content-hashed URL; fetch + parse into row objects, "-" → null)
-  → normalizer.js  (parse dates, classify outcomes, dedup by Launch_Tag)
-  → aggregator.js  (filter + group into chart-ready structures)
-```
+TSV column names don't match their UI concepts:
+
+| UI concept | TSV column |
+|-----------|-----------|
+| Country | `LVState` |
+| Vehicle | `LV_Type` |
+| Outcome | `Launch_Code` (OS/DS→Success, OF→Failure, XS→Suborbital) |
+
+### Data Model
 
 The normalizer produces two arrays: **launches** (~7,200 unique by Launch_Tag) and **payloads** (~28,750 rows). Charts work with launch-level data; payload search filters by matching Name/PLName then maps back to Launch_Tags.
 
-### Key Data Fields
-
-| UI concept | TSV column | Filter key |
-|-----------|-----------|------------|
-| Country | `LVState` | `country` |
-| Agency | `Agency` | `agency` |
-| Vehicle | `LV_Type` | `vehicle` |
-| Site | `Launch_Site` | `site` |
-| Pad | `Launch_Pad` | `pad` |
-| Outcome | `Launch_Code` | (derived in normalizer: OS/DS→Success, OF→Failure, XS→Suborbital) |
-
-### Detail Pages (MPA)
-
-Vite is configured as `appType: 'mpa'` with separate HTML entry points. Each detail page lives in its own directory with an `index.html` and a corresponding `src/<page>.js` entry.
-
-| Page | URL pattern | Entry | Query param |
-|------|------------|-------|-------------|
-| Vehicle | `/vehicle?v=<LV_Type>` | `src/vehicle.js` | `v` |
-| Agency | `/agency?a=<Agency>` | `src/agency.js` | `a` |
-| Site | `/site?s=<Launch_Site>` | `src/site.js` | `s` |
-| Country | `/country?c=<LVState>` | `src/country.js` | `c` |
-
-Clicking vehicle/agency/site/country bars on the main page navigates to the respective detail page.
-
 ### Monthly Drill-Down
 
-Both `launchesOverTime.js` (main dashboard) and `vehicleBarChart.js` (detail pages) support clicking a year bar to drill into monthly bars for that year. Drilling updates ALL page filters (not just the chart):
-
-- **Main dashboard**: `drillInto(year)` saves the previous year range, then calls `filterState.set({ yearMin: year, yearMax: year })`. All charts receive data filtered to that single year. The timeline chart renders monthly bars via `launchesByMonth`/`launchesByMonthStacked` from `aggregator.js`. Back button restores the previous range via `filterState.set()`.
-- **Detail pages**: `createVehicleBarChart` accepts an `onDrillYear(year|null)` callback. `detailPage.js` wires this to save/restore yearMin/yearMax, update the slider via `setValues()`, and call `updateCharts()` so all detail page charts reflect the drilled year.
-- **Auto-exit**: If the user manually changes the year range (slider drag, Clear All) while drilled in, drill mode exits automatically — the chart's `update()` detects the year range no longer matches `drillYear`.
-
-### Shareable URL State
-
-Filter state is encoded in URL query params so views can be shared.
-
-**Main dashboard** (`src/filters/urlSync.js`): `parseUrlFilters()` reads params on load, `startUrlSync()` subscribes to filterState and writes params via `history.replaceState()`. Param mapping: `country`, `agency`, `vehicle`, `site`, `pad` (direct), `q` → `payloadSearch`, `from` → `yearMin`, `to` → `yearMax`. Default values are omitted for clean URLs.
-
-**Detail pages** (`src/detailPage.js`): Read `from`/`to` params to set initial year range on the slider. Slider changes sync back to the URL.
+Drilling into a year updates ALL page filters (not just the chart) via `filterState.set({ yearMin: year, yearMax: year })`. Auto-exit: if the user changes the year range while drilled in, drill mode exits automatically — the chart's `update()` detects the mismatch.
 
 `dualRangeSlider.js` exposes `setValues(min, max)` for programmatic updates without triggering `onChange`.
