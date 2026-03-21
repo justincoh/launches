@@ -9,6 +9,20 @@ import { observeResize, isMobile } from '../utils/responsive.js';
 import { vehicleUrl } from '../utils/navigation.js';
 import { filterState } from '../filters/filterState.js';
 
+function yearlyXAxis(x, tickYears) {
+  const ticks = isMobile()
+    ? tickYears.filter((_, i) => i % Math.max(1, Math.ceil(tickYears.length / 5)) === 0)
+    : tickYears;
+  return d3.axisBottom(x).tickValues(ticks).tickFormat(d3.format('d'));
+}
+
+function monthlyXAxis(x, data) {
+  const months = data.map(d => d.month);
+  return isMobile()
+    ? d3.axisBottom(x).tickValues(months.filter((_, i) => i % 2 === 0)).tickFormat(d => MONTH_LABELS[d])
+    : d3.axisBottom(x).tickFormat(d => MONTH_LABELS[d]);
+}
+
 export function createLaunchesOverTime(container) {
   const section = document.getElementById('chart-launches-over-time');
   const controls = section.querySelector('.chart-controls');
@@ -150,15 +164,10 @@ export function createLaunchesOverTime(container) {
       .on('click', (event, d) => drillInto(d.year));
 
     const tickYears = data.map(d => d.year).filter(yr => yr % 5 === 0);
-    const mobile = isMobile();
-    const finalTicks = mobile
-      ? tickYears.filter((_, i) => i % Math.max(1, Math.ceil(tickYears.length / 5)) === 0)
-      : tickYears;
-    const xAxis = d3.axisBottom(x).tickValues(finalTicks).tickFormat(d3.format('d'));
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
-      .call(xAxis);
+      .call(yearlyXAxis(x, tickYears));
 
     g.append('g')
       .attr('class', 'axis')
@@ -200,14 +209,10 @@ export function createLaunchesOverTime(container) {
       })
       .on('mouseleave', () => tooltip.hide());
 
-    const months = data.map(d => d.month);
-    const xAxis = isMobile()
-      ? d3.axisBottom(x).tickValues(months.filter((_, i) => i % 2 === 0)).tickFormat(d => MONTH_LABELS[d])
-      : d3.axisBottom(x).tickFormat(d => MONTH_LABELS[d]);
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
-      .call(xAxis);
+      .call(monthlyXAxis(x, data));
 
     g.append('g')
       .attr('class', 'axis')
@@ -273,15 +278,10 @@ export function createLaunchesOverTime(container) {
       .on('click', (event, d) => drillInto(d.year));
 
     const tickYears = data.map(d => d.year).filter(yr => yr % 5 === 0);
-    const mobile = isMobile();
-    const finalTicks = mobile
-      ? tickYears.filter((_, i) => i % Math.max(1, Math.ceil(tickYears.length / 5)) === 0)
-      : tickYears;
-    const xAxis = d3.axisBottom(x).tickValues(finalTicks).tickFormat(d3.format('d'));
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
-      .call(xAxis);
+      .call(yearlyXAxis(x, tickYears));
 
     g.append('g')
       .attr('class', 'axis')
@@ -358,14 +358,10 @@ export function createLaunchesOverTime(container) {
       })
       .on('mouseleave', () => tooltip.hide());
 
-    const sMonths = data.map(d => d.month);
-    const xAxis = isMobile()
-      ? d3.axisBottom(x).tickValues(sMonths.filter((_, i) => i % 2 === 0)).tickFormat(d => MONTH_LABELS[d])
-      : d3.axisBottom(x).tickFormat(d => MONTH_LABELS[d]);
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
-      .call(xAxis);
+      .call(monthlyXAxis(x, data));
 
     g.append('g')
       .attr('class', 'axis')
