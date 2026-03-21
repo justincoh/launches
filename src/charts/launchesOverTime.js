@@ -5,7 +5,7 @@ import { categoryColor } from '../utils/colorScale.js';
 import { fmtNum } from '../utils/formatters.js';
 import { COUNTRY_NAMES } from '../data/countryNames.js';
 import { AGENCY_NAMES } from '../data/agencyNames.js';
-import { observeResize } from '../utils/responsive.js';
+import { observeResize, isMobile } from '../utils/responsive.js';
 import { vehicleUrl } from '../utils/navigation.js';
 import { filterState } from '../filters/filterState.js';
 
@@ -150,7 +150,11 @@ export function createLaunchesOverTime(container) {
       .on('click', (event, d) => drillInto(d.year));
 
     const tickYears = data.map(d => d.year).filter(yr => yr % 5 === 0);
-    const xAxis = d3.axisBottom(x).tickValues(tickYears).tickFormat(d3.format('d'));
+    const mobile = isMobile();
+    const finalTicks = mobile
+      ? tickYears.filter((_, i) => i % Math.max(1, Math.ceil(tickYears.length / 5)) === 0)
+      : tickYears;
+    const xAxis = d3.axisBottom(x).tickValues(finalTicks).tickFormat(d3.format('d'));
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
@@ -196,7 +200,10 @@ export function createLaunchesOverTime(container) {
       })
       .on('mouseleave', () => tooltip.hide());
 
-    const xAxis = d3.axisBottom(x).tickFormat(d => MONTH_LABELS[d]);
+    const months = data.map(d => d.month);
+    const xAxis = isMobile()
+      ? d3.axisBottom(x).tickValues(months.filter((_, i) => i % 2 === 0)).tickFormat(d => MONTH_LABELS[d])
+      : d3.axisBottom(x).tickFormat(d => MONTH_LABELS[d]);
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
@@ -266,7 +273,11 @@ export function createLaunchesOverTime(container) {
       .on('click', (event, d) => drillInto(d.year));
 
     const tickYears = data.map(d => d.year).filter(yr => yr % 5 === 0);
-    const xAxis = d3.axisBottom(x).tickValues(tickYears).tickFormat(d3.format('d'));
+    const mobile = isMobile();
+    const finalTicks = mobile
+      ? tickYears.filter((_, i) => i % Math.max(1, Math.ceil(tickYears.length / 5)) === 0)
+      : tickYears;
+    const xAxis = d3.axisBottom(x).tickValues(finalTicks).tickFormat(d3.format('d'));
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
@@ -347,7 +358,10 @@ export function createLaunchesOverTime(container) {
       })
       .on('mouseleave', () => tooltip.hide());
 
-    const xAxis = d3.axisBottom(x).tickFormat(d => MONTH_LABELS[d]);
+    const sMonths = data.map(d => d.month);
+    const xAxis = isMobile()
+      ? d3.axisBottom(x).tickValues(sMonths.filter((_, i) => i % 2 === 0)).tickFormat(d => MONTH_LABELS[d])
+      : d3.axisBottom(x).tickFormat(d => MONTH_LABELS[d]);
     g.append('g')
       .attr('class', 'axis')
       .attr('transform', `translate(0,${innerH})`)
