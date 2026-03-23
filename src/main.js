@@ -1,6 +1,7 @@
 import './styles/main.css';
 import './styles/filters.css';
 import './styles/charts.css';
+import './styles/atompunk.css';
 
 import { fetchAndParse } from './data/parser.js';
 import { normalize } from './data/normalizer.js';
@@ -13,6 +14,10 @@ import { createSuccessFailure } from './charts/successFailure.js';
 import { createTopRankings } from './charts/topRankings.js';
 import { createVehicleTimeline } from './charts/vehicleTimeline.js';
 import { SITE_NAMES } from './data/siteNames.js';
+import { initThemeToggle } from './themeToggle.js';
+
+// Theme toggle
+initThemeToggle();
 
 // Info popover toggle
 const infoBtn = document.getElementById('info-btn');
@@ -66,6 +71,9 @@ async function init() {
 
     // Initial render
     chartManager.initialRender();
+
+    // Re-render charts when theme changes (colors update)
+    window.addEventListener('theme-change', () => chartManager.update());
 
     // Populate latest record in footer
     const latest = launches[launches.length - 1];

@@ -1,6 +1,7 @@
 import './styles/main.css';
 import './styles/filters.css';
 import './styles/charts.css';
+import './styles/atompunk.css';
 
 import { fetchAndParse } from './data/parser.js';
 import { normalize } from './data/normalizer.js';
@@ -10,8 +11,11 @@ import { createVehicleBarChart } from './charts/vehicleBarChart.js';
 import { createSuccessFailure } from './charts/successFailure.js';
 import { createTopRankings } from './charts/topRankings.js';
 import { fmtDate } from './utils/formatters.js';
+import { initThemeToggle } from './themeToggle.js';
 
 export async function initDetailPage(config) {
+  initThemeToggle();
+
   const {
     paramKey, field, displayName, pageTitle, notFoundMsg, searchPrompt,
     typeaheadOptions, headerExtra, sfOptions, trOptions,
@@ -143,6 +147,9 @@ export async function initDetailPage(config) {
     dashboardEl.style.display = '';
 
     updateCharts();
+
+    // Re-render charts when theme changes (colors update)
+    window.addEventListener('theme-change', () => updateCharts());
 
   } catch (err) {
     loadingEl.innerHTML = `<p style="color: var(--failure);">Failed to load data: ${err.message}</p>`;

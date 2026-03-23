@@ -1,0 +1,288 @@
+/* ============================================
+   ATOMPUNK THEME
+   Retrofuturistic 1950s atomic age / Fallout
+   ============================================ */
+
+/* --- Theme toggle button (works in both themes) --- */
+.theme-toggle-btn {
+  position: absolute;
+  top: 1.65rem;
+  left: 0;
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all .15s;
+  font-family: var(--font);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* On detail pages, offset below the back link */
+.back-link ~ .theme-toggle-btn {
+  top: 3.2rem;
+}
+
+@media (max-width: 768px) {
+  .theme-toggle-btn {
+    display: none;
+  }
+}
+
+/* ================================================
+   ATOMPUNK COLOR OVERRIDES
+   ================================================ */
+
+[data-theme="atompunk"] {
+  --bg: #0c0a05;
+  --surface: #1c1810;
+  --surface-hover: #282015;
+  --border: #3d3422;
+  --text: #e8d4a0;
+  --text-muted: #9a8860;
+  --accent: #d4943c;
+  --accent-hover: #e8a84c;
+  --success: #4ecb71;
+  --failure: #c94a3e;
+  --partial: #c8903a;
+  --suborbital: #7a8a40;
+  --font: 'Jost', 'Century Gothic', 'Futura', sans-serif;
+  --mono: 'VT323', 'Courier New', monospace;
+  --radius: 2px;
+  --shadow: 0 2px 12px rgba(40, 180, 75, 0.15);
+}
+
+/* ================================================
+   DISPLAY TYPOGRAPHY
+   ================================================ */
+
+[data-theme="atompunk"] .app-header h1 {
+  font-family: 'Russo One', 'Impact', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 0 24px rgba(212, 148, 60, 0.35),
+               0 0 4px rgba(212, 148, 60, 0.15);
+}
+
+[data-theme="atompunk"] .chart-header h2 {
+  font-family: 'Russo One', 'Impact', sans-serif;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+}
+
+[data-theme="atompunk"] #detail-name {
+  font-family: 'Russo One', 'Impact', sans-serif;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 20px rgba(212, 148, 60, 0.3);
+}
+
+[data-theme="atompunk"] .app-footer {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+/* ================================================
+   STRUCTURAL — borders, cards, surfaces
+   ================================================ */
+
+[data-theme="atompunk"] .chart-section {
+  border-width: 2px;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.25);
+}
+
+[data-theme="atompunk"] .filter-bar {
+  border-width: 2px;
+}
+
+[data-theme="atompunk"] .dropdown-panel {
+  border-width: 2px;
+}
+
+[data-theme="atompunk"] .d3-tooltip {
+  border-width: 2px;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+}
+
+[data-theme="atompunk"] .d3-tooltip .tt-title {
+  font-family: 'Russo One', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.8rem;
+}
+
+/* ================================================
+   INTERACTIVE ELEMENTS — glow effects
+   ================================================ */
+
+[data-theme="atompunk"] .filter-trigger.has-value {
+  box-shadow: 0 0 10px rgba(212, 148, 60, 0.35);
+}
+
+[data-theme="atompunk"] .toggle-btn.active,
+[data-theme="atompunk"] .toggle-btn:hover {
+  box-shadow: 0 0 10px rgba(212, 148, 60, 0.35);
+}
+
+[data-theme="atompunk"] .dual-range-thumb {
+  border-color: var(--bg);
+  border-radius: 2px;
+}
+
+[data-theme="atompunk"] .dual-range-thumb:hover,
+[data-theme="atompunk"] .dual-range-thumb:active {
+  box-shadow: 0 0 0 4px rgba(212, 148, 60, 0.2);
+}
+
+[data-theme="atompunk"] .dual-range-fill {
+  box-shadow: 0 0 4px rgba(212, 148, 60, 0.4);
+}
+
+[data-theme="atompunk"] a {
+  text-shadow: 0 0 8px rgba(212, 148, 60, 0.25);
+}
+
+[data-theme="atompunk"] .info-btn:hover {
+  box-shadow: 0 0 8px rgba(212, 148, 60, 0.3);
+}
+
+/* ================================================
+   CHART AXIS — terminal mono feel
+   ================================================ */
+
+[data-theme="atompunk"] .axis text {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+[data-theme="atompunk"] .axis path,
+[data-theme="atompunk"] .axis line {
+  stroke: var(--border);
+}
+
+[data-theme="atompunk"] .grid line {
+  stroke: rgba(61, 52, 34, 0.5);
+}
+
+/* ================================================
+   BACK LINK (detail pages)
+   ================================================ */
+
+[data-theme="atompunk"] .back-link {
+  font-family: 'Russo One', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.7rem;
+}
+
+/* ================================================
+   THEME TOGGLE — atompunk styling
+   ================================================ */
+
+[data-theme="atompunk"] .theme-toggle-btn {
+  font-family: 'Russo One', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-width: 2px;
+  font-size: 0.65rem;
+}
+
+[data-theme="atompunk"] .theme-toggle-btn:hover {
+  box-shadow: 0 0 8px rgba(212, 148, 60, 0.3);
+}
+
+/* ================================================
+   CRT EFFECTS — scanlines + vignette
+   ================================================ */
+
+[data-theme="atompunk"] body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.025) 2px,
+    rgba(0, 0, 0, 0.025) 4px
+  );
+  mix-blend-mode: multiply;
+}
+
+[data-theme="atompunk"] body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 55%,
+    rgba(12, 10, 5, 0.5) 100%
+  );
+}
+
+/* ================================================
+   SCROLLBAR
+   ================================================ */
+
+[data-theme="atompunk"] ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+[data-theme="atompunk"] ::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+[data-theme="atompunk"] ::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 0;
+}
+
+[data-theme="atompunk"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* ================================================
+   LEGEND SWATCHES — sharper corners
+   ================================================ */
+
+[data-theme="atompunk"] .legend-swatch {
+  border-radius: 0;
+}
+
+[data-theme="atompunk"] .d3-tooltip .tt-swatch {
+  border-radius: 0;
+}
+
+/* ================================================
+   SPINNER
+   ================================================ */
+
+[data-theme="atompunk"] .spinner {
+  border-radius: 2px;
+  border-top-color: var(--accent);
+}
+
+/* ================================================
+   MOBILE OVERLAY
+   ================================================ */
+
+[data-theme="atompunk"] .filter-overlay .overlay-apply {
+  font-family: 'Russo One', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
