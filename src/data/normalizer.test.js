@@ -59,6 +59,18 @@ describe('normalize — date parsing', () => {
     expect(launches[0].date).toBeNull();
     expect(launches[0].year).toBeNull();
   });
+
+  it('sets date/year to null for year far in the future', () => {
+    const { launches } = normalize([makeRow({ Launch_Date: '2206 Mar 25' })]);
+    expect(launches[0].date).toBeNull();
+    expect(launches[0].year).toBeNull();
+  });
+
+  it('sets date/year to null for year before 1957', () => {
+    const { launches } = normalize([makeRow({ Launch_Date: '1900 Jan 01' })]);
+    expect(launches[0].date).toBeNull();
+    expect(launches[0].year).toBeNull();
+  });
 });
 
 // ---------------------------------------------------------------------------

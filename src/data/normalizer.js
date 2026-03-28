@@ -10,6 +10,8 @@ function parseDate(str) {
   const m = str.match(DATE_RE);
   if (!m) return null;
   const year = +m[1];
+  const currentYear = new Date().getFullYear();
+  if (year < 1957 || year > currentYear) return null;
   const month = MONTHS[m[2]];
   if (month === undefined) return null;
   const day = +m[3];

@@ -19,6 +19,9 @@ jobs:
       - name: Fetch latest launch data
         run: curl -fSL -o src/data/launchlog.tsv https://planet4589.org/space/gcat/tsv/derived/launchlog.tsv
 
+      - name: Sanitize data
+        run: bash scripts/sanitize-data.sh src/data/launchlog.tsv
+
       - name: Commit and push if changed
         id: commit
         run: |
