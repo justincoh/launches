@@ -2,7 +2,7 @@ import * as d3 from 'd3';
 import { tooltip } from '../utils/tooltip.js';
 import { outcomeColors } from '../utils/colorScale.js';
 import { fmtNum } from '../utils/formatters.js';
-import { observeResize } from '../utils/responsive.js';
+import { observeResize, isMobile } from '../utils/responsive.js';
 import { MONTH_LABELS } from '../data/aggregator.js';
 
 export function createVehicleBarChart(section, options = {}) {
@@ -160,11 +160,12 @@ export function createVehicleBarChart(section, options = {}) {
     if (drillYear !== null) {
       xAxis = d3.axisBottom(x).tickFormat(xTickFormat);
     } else {
-      xAxis = d3.axisBottom(x).tickValues(
-        data.length > 20
-          ? data.filter((_, i) => i % Math.ceil(data.length / 15) === 0).map(d => d.year)
-          : data.map(d => d.year)
-      );
+      const maxTicks = isMobile() ? 5 : 15;
+      const allYears = data.map(d => d.year);
+      const ticks = data.length > maxTicks
+        ? data.filter((_, i) => i % Math.ceil(data.length / maxTicks) === 0).map(d => d.year)
+        : allYears;
+      xAxis = d3.axisBottom(x).tickValues(ticks);
     }
     g.append('g')
       .attr('class', 'axis')
