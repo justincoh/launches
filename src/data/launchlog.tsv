@@ -1,5 +1,5 @@
 #Launch_Tag	Launch_Date	Piece	Type	Name	PLName	JCAT	SatOwner	SatState	LV_Type	Flight_ID	Platform	Launch_Site	Launch_Pad	Ascent_Site	Ascent_Pad	Agency	LVState	Launch_Code	LTCite
-# Updated 2026 Jun 30 1027:34
+# Updated 2026 Jul  1 1419:10
 1957 ALP  	1957 Oct  4 1928:34	1957 ALP 2	P           	1-y ISZ	PS-1	S00002	OKB1	SU	Sputnik 8K71PS	M1-PS	-	NIIP-5	LC1	-	-	MVS	SU	OS	Energiya
 1957 BET  	1957 Nov  3 0230:42	1957 BET 1	P A         	2-y ISZ	PS-2	S00003	OKB1	SU	Sputnik 8K71PS	M1-2PS	-	NIIP-5	LC1	-	-	MVS	SU	OS	Grahn-WWW
 1957-F01  	1957 Dec  6 1644:35	1957-F01	P   F       	Vanguard	Vanguard Test Satellite F	F00002	NRL	US	Vanguard	TV-3	-	CC	LC18A	-	-	NRL	US	OF	Vang-ER9948
@@ -29875,7 +29875,7 @@
 2026-098 	2026 Apr 30 0857:15	2026-098AF	P      A    	Kuiper-00454	Kuiper LE02-30	S68948	KUIP	US	Ariane 64	VA268 (L6007?)	-	CSG	ELA4	-	-	AE	F	OS	nasaspaceflight.com
 2026-098 	2026 Apr 30 0857:15	2026-098AG	P      A    	Kuiper-00455	Kuiper LE02-31	S68949	KUIP	US	Ariane 64	VA268 (L6007?)	-	CSG	ELA4	-	-	AE	F	OS	nasaspaceflight.com
 2026-098 	2026 Apr 30 0857:15	2026-098AH	P      D    	Kuiper-00458	Kuiper LE02-32	S68950	KUIP	US	Ariane 64	VA268 (L6007?)	-	CSG	ELA4	-	-	AE	F	OS	nasaspaceflight.com
-2026-U01  	2026 Apr 30 1800	2026-U01	P           	GMM	Gabaritno-Masovoy Maket	A11835	PROG	RU	Soyuz-5	F15000-001	-	NIIP-5	LC45/1	-	-	UNKS	RU	OS	Wire
+2026-U01  	2026 Apr 30 1800	2026-U01	PX--S       	GMM	Gabaritno-Masovoy Maket	A11835	PROG	RU	Soyuz-5	F15000-001	-	NIIP-5	LC45/1	-	-	UNKS	RU	OS	Wire
 2026-099 	2026 May  1 1806:10	2026-099A	P      O    	Starlink 37258	Starlink Group 10-38-01	S68951	SPXS	US	Falcon 9	xxx/B1069.31 F635	-	CC	LC40	-	-	SPX	US	OS	nasaspaceflight.com
 2026-099 	2026 May  1 1806:10	2026-099B	P      O    	Starlink 37308	Starlink Group 10-38-02	S68952	SPXS	US	Falcon 9	xxx/B1069.31 F635	-	CC	LC40	-	-	SPX	US	OS	nasaspaceflight.com
 2026-099 	2026 May  1 1806:10	2026-099C	P      O    	Starlink 37337	Starlink Group 10-38-03	S68953	SPXS	US	Falcon 9	xxx/B1069.31 F635	-	CC	LC40	-	-	SPX	US	OS	nasaspaceflight.com
@@ -30097,28 +30097,28 @@
 2026-111 	2026 May 21 1004:20	2026-111AE	P      O    	Starlink 37414	Starlink Group 10-31-29	S69176	SPXS	US	Falcon 9	xxx/B1077.28 F641	-	CC	LC40	-	-	SPX	US	OS	SpaceX
 2026-112 	2026 May 22 0933	2026-112A	P           	Strix-7	Strix-7	S69177	SYNSP	J	Electron	88	-	MAHIA	LC1B	-	-	RLABN	NZ	OS	Wire
 2026-U02  	2026 May 22 2230:20	2026-U02	P   S       	Starship FT-12	Starship 39	A11856	SPX	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 39	Starlink Simulator	A11857	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 40	Starlink Simulator	A11858	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 41	Starlink Simulator	A11859	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 42	Starlink Simulator	A11860	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 43	Starlink Simulator	A11861	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 44	Starlink Simulator	A11862	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 45	Starlink Simulator	A11863	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 46	Starlink Simulator	A11864	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 47	Starlink Simulator	A11865	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 48	Starlink Simulator	A11866	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 49	Starlink Simulator	A11867	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 50	Starlink Simulator	A11868	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 51	Starlink Simulator	A11869	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 52	Starlink Simulator	A11870	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 53	Starlink Simulator	A11871	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 54	Starlink Simulator	A11872	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 55	Starlink Simulator	A11873	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 56	Starlink Simulator	A11874	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 57	Starlink Simulator	A11875	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink Simulator 58	Starlink Simulator	A11876	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink 36232	Starlink Dodger Dog 1	A11877	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
-2026-U02  	2026 May 22 2230:20	2026-U02	PX-D        	Starlink 36231	Starlink Dodger Dog 2	A11878	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 39	Starlink Simulator	A11857	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 40	Starlink Simulator	A11858	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 41	Starlink Simulator	A11859	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 42	Starlink Simulator	A11860	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 43	Starlink Simulator	A11861	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 44	Starlink Simulator	A11862	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 45	Starlink Simulator	A11863	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 46	Starlink Simulator	A11864	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 47	Starlink Simulator	A11865	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 48	Starlink Simulator	A11866	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 49	Starlink Simulator	A11867	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 50	Starlink Simulator	A11868	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 51	Starlink Simulator	A11869	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 52	Starlink Simulator	A11870	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 53	Starlink Simulator	A11871	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 54	Starlink Simulator	A11872	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 55	Starlink Simulator	A11873	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 56	Starlink Simulator	A11874	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 57	Starlink Simulator	A11875	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink Simulator 58	Starlink Simulator	A11876	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink 36232	Starlink Dodger Dog 1	A11877	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
+2026-U02  	2026 May 22 2230:20	2026-U02	PX-DS       	Starlink 36231	Starlink Dodger Dog 2	A11878	SPXS	US	Starship V3	B19/S39	-	STB	OLP2	-	-	SPX	US	OS	nasaspaceflight.com
 2026-113 	2026 May 24 1508	2026-113A	PH-H-V-     	Shenzhou 23	Shenzhou 23 Fanhui Cang	S69180	CMSEO	CN	Chang Zheng 2F	Y23	-	JQ	LC43/91	-	-	CALT	CN	OS	nasaspaceflight.com
 2026-114 	2026 May 25 1148:04	2026-114A	P      A    	Starlink 37380	Starlink Group 10-47-01	S69182	SPXS	US	Falcon 9	xxx/B1078.28 F642	-	CC	LC40	-	-	SPX	US	OS	SpaceX
 2026-114 	2026 May 25 1148:04	2026-114B	P      A    	Starlink 37089	Starlink Group 10-47-02	S69183	SPXS	US	Falcon 9	xxx/B1078.28 F642	-	CC	LC40	-	-	SPX	US	OS	SpaceX
@@ -30406,7 +30406,7 @@
 2026-128 	2026 Jun  9 0823	2026-128A	P      D    	Qianfan DTC 01	Qianfan DTC 01	S69472	YUANX	CN	Zhuque-2E	Y6	-	JQ	LC43/96A	-	-	LANDSP	CN	OS	nasaspaceflight.com
 2026-128 	2026 Jun  9 0823	2026-128B	P           	Zhongguo Yidong 02	Zhongguo Yidong 02	S69473	ZYD	CN	Zhuque-2E	Y6	-	JQ	LC43/96A	-	-	LANDSP	CN	OS	nasaspaceflight.com
 2026-129 	2026 Jun 11 0730	2026-129A	P           	Tongxin Jishu Shiyan 25	TJS 25	S69474	ZZB/CAST	CN	Chang Zheng 5	Y11	-	WEN	LC101	-	-	CALT	CN	OS	nasaspaceflight.com
-2026-130 	2026 Jun 11 0800?	2026-130	PX          	CURVEBALL	CURVEBALL	A11891	MDA	US	HASTE	89	-	MARS	Pad 0C	-	-	RLABU	US	OS	nasaspaceflight.com
+2026-130 	2026 Jun 11 0800?	2026-130	PX  P       	CURVEBALL	CURVEBALL	A11891	MDA	US	HASTE	89	-	MARS	Pad 0C	-	-	RLABU	US	OS	nasaspaceflight.com
 2026-131 	2026 Jun 11 1505:59	2026-131A	P      A    	Starlink 37816	Starlink Group 17-44-01	S69478	SPXS	US	Falcon 9	xxx/B1071.34 F650	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
 2026-131 	2026 Jun 11 1505:59	2026-131B	P      D    	Starlink 37878	Starlink Group 17-44-02	S69479	SPXS	US	Falcon 9	xxx/B1071.34 F650	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
 2026-131 	2026 Jun 11 1505:59	2026-131C	P      A    	Starlink 37817	Starlink Group 17-44-03	S69480	SPXS	US	Falcon 9	xxx/B1071.34 F650	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
@@ -30431,15 +30431,15 @@
 2026-131 	2026 Jun 11 1505:59	2026-131X	P      A    	Starlink 37849	Starlink Group 17-44-22	S69499	SPXS	US	Falcon 9	xxx/B1071.34 F650	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
 2026-131 	2026 Jun 11 1505:59	2026-131Y	P      A    	Starlink 37835	Starlink Group 17-44-23	S69500	SPXS	US	Falcon 9	xxx/B1071.34 F650	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
 2026-131 	2026 Jun 11 1505:59	2026-131Z	P      A    	Starlink 37843	Starlink Group 17-44-24	S69501	SPXS	US	Falcon 9	xxx/B1071.34 F650	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-132 	2026 Jun 12 0053:59	2026-132A	P       ?   	Umitsubame	PETREL	S69502	SCITOK	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
-2026-132 	2026 Jun 12 0053:59	2026-132B	P       ?   	STARS-X	STARS-X Mother	S69503	SHIZ	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
+2026-132 	2026 Jun 12 0053:59	2026-132A	P           	STARS-X	STARS-X Mother	S69502	SHIZ	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
+2026-132 	2026 Jun 12 0053:59	2026-132B	P       ?   	Umitsubame	PETREL	S69503	SCITOK	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
 2026-132 	2026 Jun 12 0053:59	2026-132C	P           	BRO-22	BRO-22	S69504	UNSEEN	F	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
-2026-132 	2026 Jun 12 0053:59	2026-132D	P       ?   	HORN-L	HORN-L	S69505	BULL	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
+2026-132 	2026 Jun 12 0053:59	2026-132D	P           	HORN-L	HORN-L	S69505	BULL	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
 2026-132 	2026 Jun 12 0053:59	2026-132E	P           	VERTECS	VERTECS	S69506	KYUT	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
-2026-132 	2026 Jun 12 0053:59	2026-132F	P       ?   	HORN-R	HORN-R	S69507	BULL	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
-2026-132 	2026 Jun 12 0053:59	2026-132	P           	VEP-5	VEP-5	A11893	JAXA	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
-2026-132 	2026 Jun 12 0053:59	2026-132B	PXA         	STARS-X Dtr	STARS-X Daughter	A11895	SHIZ	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
-2026-132 	2026 Jun 12 0053:59	2026-132B	PXA         	STARS-X Climber	STARS-X Climber	A11896	SHIZ	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
+2026-132 	2026 Jun 12 0053:59	2026-132F	P           	HORN-R	HORN-R	S69507	BULL	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
+2026-132 	2026 Jun 12 0053:59	2026-132	P   P       	VEP-5	VEP-5	A11893	JAXA	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
+2026-132 	2026 Jun 12 0053:59	2026-132A	PXA         	STARS-X Dtr	STARS-X Daughter	A11895	SHIZ	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
+2026-132 	2026 Jun 12 0053:59	2026-132A	PXA         	STARS-X Climber	STARS-X Climber	A11896	SHIZ	J	H3-30S	H3-F6	-	TNSC	Y2	-	-	JAXA	J	OS	Wire
 2026-133 	2026 Jun 12 1237:00	2026-133A	P      A    	Starlink 37536	Starlink Group 10-54-01	S69508	SPXS	US	Falcon 9	xxx/B1080.27 F651	-	CC	LC40	-	-	SPX	US	OS	SpaceX
 2026-133 	2026 Jun 12 1237:00	2026-133B	P      A    	Starlink 37341	Starlink Group 10-54-02	S69509	SPXS	US	Falcon 9	xxx/B1080.27 F651	-	CC	LC40	-	-	SPX	US	OS	SpaceX
 2026-133 	2026 Jun 12 1237:00	2026-133C	P      A    	Starlink 36536	Starlink Group 10-54-03	S69510	SPXS	US	Falcon 9	xxx/B1080.27 F651	-	CC	LC40	-	-	SPX	US	OS	SpaceX
@@ -30593,31 +30593,31 @@
 2026-143 	2026 Jun 21 1639:06	2026-143Y	P      A    	Starlink 37949	Starlink Group 17-28-23	S69671	SPXS	US	Falcon 9	xxx/B1063.33 F655	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
 2026-143 	2026 Jun 21 1639:06	2026-143Z	P      A    	Starlink 37946	Starlink Group 17-28-24	S69672	SPXS	US	Falcon 9	xxx/B1063.33 F655	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
 2026-144 	2026 Jun 23 0210	2026-144A	P           	Tongxin Jishu Shiyan 26A	Huoyan-7?	S69674	ZLZB	CN	Chang Zheng 7A	Y20	-	WEN	LC201	-	-	CALT	CN	OS	nasaspaceflight.com
-2026-U03  	2026 Jun 23 1053:00	2026-U03	P           	Starfall Demo	Starfall Demo	A11910	SPX	US	Falcon 9	xxx/B1078.29 F656	-	CC	LC40	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145A	P      A    	Starlink 38005	Starlink Group 17-45-01	S69677	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145B	P      A    	Starlink 38009	Starlink Group 17-45-02	S69678	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145C	P      A    	Starlink 37998	Starlink Group 17-45-03	S69679	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145D	P      A    	Starlink 37994	Starlink Group 17-45-04	S69680	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145E	P      A    	Starlink 37992	Starlink Group 17-45-05	S69681	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145F	P      A    	Starlink 37997	Starlink Group 17-45-06	S69682	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145G	P      A    	Starlink 37990	Starlink Group 17-45-07	S69683	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145H	P      A    	Starlink 37951	Starlink Group 17-45-08	S69684	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145J	P      A    	Starlink 37957	Starlink Group 17-45-09	S69685	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145K	P      A    	Starlink 37968	Starlink Group 17-45-10	S69686	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145L	P      A    	Starlink 37977	Starlink Group 17-45-11	S69687	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145M	P      A    	Starlink 37908	Starlink Group 17-45-12	S69688	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145N	P      A    	Starlink 37979	Starlink Group 17-45-13	S69689	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145P	P      A    	Starlink 37940	Starlink Group 17-45-14	S69690	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145Q	P      A    	Starlink 37961	Starlink Group 17-45-15	S69691	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145R	P      A    	Starlink 37787	Starlink Group 17-45-16	S69692	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145S	P      A    	Starlink 37962	Starlink Group 17-45-17	S69693	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145T	P      A    	Starlink 37953	Starlink Group 17-45-18	S69694	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145U	P      A    	Starlink 37926	Starlink Group 17-45-19	S69695	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145V	P      A    	Starlink 37959	Starlink Group 17-45-20	S69696	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145W	P      D    	Starlink 37976	Starlink Group 17-45-21	S69697	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145X	P      D    	Starlink 37912	Starlink Group 17-45-22	S69698	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145Y	P      D    	Starlink 37974	Starlink Group 17-45-23	S69699	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
-2026-145 	2026 Jun 24 0330:38	2026-145Z	P      D    	Starlink 37955	Starlink Group 17-45-24	S69700	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-U03  	2026 Jun 23 1053:00	2026-U03	P   M       	Starfall Demo	Starfall Demo	A11910	SPX	US	Falcon 9	xxx/B1078.29 F656	-	CC	LC40	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145A	P      A    	Starlink 38005	Starlink Group 17-45-01	S69677	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145B	P      A    	Starlink 38009	Starlink Group 17-45-02	S69678	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145C	P      A    	Starlink 37998	Starlink Group 17-45-03	S69679	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145D	P      A    	Starlink 37994	Starlink Group 17-45-04	S69680	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145E	P      A    	Starlink 37992	Starlink Group 17-45-05	S69681	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145F	P      A    	Starlink 37997	Starlink Group 17-45-06	S69682	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145G	P      A    	Starlink 37990	Starlink Group 17-45-07	S69683	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145H	P      A    	Starlink 37951	Starlink Group 17-45-08	S69684	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145J	P      A    	Starlink 37957	Starlink Group 17-45-09	S69685	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145K	P      A    	Starlink 37968	Starlink Group 17-45-10	S69686	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145L	P      A    	Starlink 37977	Starlink Group 17-45-11	S69687	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145M	P      A    	Starlink 37908	Starlink Group 17-45-12	S69688	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145N	P      A    	Starlink 37979	Starlink Group 17-45-13	S69689	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145P	P      A    	Starlink 37940	Starlink Group 17-45-14	S69690	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145Q	P      A    	Starlink 37961	Starlink Group 17-45-15	S69691	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145R	P      A    	Starlink 37787	Starlink Group 17-45-16	S69692	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145S	P      A    	Starlink 37962	Starlink Group 17-45-17	S69693	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145T	P      A    	Starlink 37953	Starlink Group 17-45-18	S69694	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145U	P      A    	Starlink 37926	Starlink Group 17-45-19	S69695	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145V	P      A    	Starlink 37959	Starlink Group 17-45-20	S69696	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145W	P      D    	Starlink 37976	Starlink Group 17-45-21	S69697	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145X	P      D    	Starlink 37912	Starlink Group 17-45-22	S69698	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145Y	P      D    	Starlink 37974	Starlink Group 17-45-23	S69699	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
+2026-145 	2026 Jun 25 0330:38	2026-145Z	P      D    	Starlink 37955	Starlink Group 17-45-24	S69700	SPXS	US	Falcon 9	xxx/B1081.25 F657	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
 2026-146 	2026 Jun 26 1743	2026-146A	P           	Strix-8	Strix-8	S69701	SYNSP	J	Electron	91	-	MAHIA	LC1B	-	-	RLABN	NZ	OS	Wire
 2026-147 	2026 Jun 28 1609:18	2026-147A	P      D    	Starlink 38055	Starlink Group 17-40-01	S69704	SPXS	US	Falcon 9	xxx/B1087.17 F658	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
 2026-147 	2026 Jun 28 1609:18	2026-147B	P      D    	Starlink 37898	Starlink Group 17-40-02	S69705	SPXS	US	Falcon 9	xxx/B1087.17 F658	-	VSFBS	SLC4E	-	-	SPX	US	OS	SpaceX
