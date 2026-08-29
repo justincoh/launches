@@ -22,6 +22,29 @@ function mpaRedirect() {
   };
 }
 
+// Inject Plausible analytics into every page's <head> so the snippet lives in
+// one place instead of being duplicated across the five HTML entry points.
+// Build-only: local dev pageviews would otherwise land in the real dashboard.
+function analytics() {
+  const stub =
+    'window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},' +
+    'plausible.init=plausible.init||function(i){plausible.o=i||{}};\nplausible.init()';
+  return {
+    name: 'analytics',
+    apply: 'build',
+    transformIndexHtml() {
+      return [
+        {
+          tag: 'script',
+          attrs: { async: true, src: 'https://plausible.io/js/pa-N6RNrcZMvQSBaG3Wynj05.js' },
+          injectTo: 'head',
+        },
+        { tag: 'script', children: stub, injectTo: 'head' },
+      ];
+    },
+  };
+}
+
 export default defineConfig({
   test: {
     environment: 'node',
@@ -30,7 +53,7 @@ export default defineConfig({
   root: '.',
   publicDir: 'public',
   appType: 'mpa',
-  plugins: [mpaRedirect()],
+  plugins: [mpaRedirect(), analytics()],
   server: {
     port: 5174,
   },
